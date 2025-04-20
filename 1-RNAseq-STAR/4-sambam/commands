@@ -1,0 +1,1 @@
+ls ../3-align/*.sam | sed -r 's/^(.*\/[^_]+_.+)Aligned.*\.sam$/\1/g' | sort -u | parallel --progress --joblog parallel.log -j 50 "(time (/home/lexic/.conda/envs/samtools/bin/samtools view -S -b {}*.sam > {/}.bam)) 2>&1 | tee {/.}.log"

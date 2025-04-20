@@ -1,0 +1,320 @@
+Path to Cutadapt set as: '/home/lexic/.conda/envs/pre/bin/cutadapt' (user defined)
+Cutadapt seems to be working fine (tested command '/home/lexic/.conda/envs/pre/bin/cutadapt --version')
+Cutadapt version: 4.4
+Could not detect version of Python used by Cutadapt from the first line of Cutadapt (but found this: >>>#!/bin/sh<<<)
+Letting the (modified) Cutadapt deal with the Python version instead
+pigz 2.8
+Parallel gzip (pigz) detected. Proceeding with multicore (de)compression using 2 cores
+
+Proceeding with 'pigz -p 2' for decompression
+To decrease CPU usage of decompression, please install 'igzip' and run again
+
+No quality encoding type selected. Assuming that the data provided uses Sanger encoded Phred scores (default)
+
+Output will be written into the directory: /blazer/nv/jh3/2-trim/
+Writing report to '/blazer/nv/jh3/2-trim/24h_J_S7_L001_R1_001.fastq.gz_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/24h_J_S7_L001_R1_001.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file(s) will be GZIP compressed
+
+Cutadapt seems to be fairly up-to-date (version 4.4). Setting -j 2
+Writing final adapter and quality trimmed output to 24h_J_S7_L001_R1_001_trimmed.fq.gz
+
+
+  >>> Now performing quality (cutoff '-q 30') and adapter trimming in a single pass for the adapter sequence: 'AGATGTGTATAAGAGACAG' from file ../0-fastq/24h_J_S7_L001_R1_001.fastq.gz <<< 
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/24h_J_S7_L001_R1_001.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 74.493 s (11.527 µs/read; 5.21 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               6,462,745
+Reads with adapters:                 1,955,393 (30.3%)
+Reads written (passing filters):     6,462,745 (100.0%)
+
+Total basepairs processed:   484,705,875 bp
+Quality-trimmed:              18,612,338 bp (3.8%)
+Total written (filtered):    463,368,562 bp (95.6%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 1955393 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 32.5%
+  C: 31.2%
+  G: 18.2%
+  T: 17.7%
+  none/other: 0.4%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	1384176	1615686.2	0	1384176
+2	428851	403921.6	0	428851
+3	103682	100980.4	0	103682
+4	27228	25245.1	0	27228
+5	8421	6311.3	0	8421
+6	1895	1577.8	0	1895
+7	464	394.5	0	464
+8	156	98.6	0	156
+9	214	24.7	0	33 181
+10	172	6.2	1	2 170
+11	102	1.5	1	1 101
+12	22	0.4	1	0 22
+13	7	0.1	1	0 7
+14	1	0.0	1	0 1
+15	1	0.0	1	0 1
+16	1	0.0	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/24h_J_S7_L001_R1_001.fastq.gz
+=============================================
+6462745 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	132187 (2.0%)
+
+Writing report to '/blazer/nv/jh3/2-trim/24h_J_S7_L002_R1_001.fastq.gz_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/24h_J_S7_L002_R1_001.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file(s) will be GZIP compressed
+
+Cutadapt seems to be fairly up-to-date (version 4.4). Setting -j -j 2
+Writing final adapter and quality trimmed output to 24h_J_S7_L002_R1_001_trimmed.fq.gz
+
+
+  >>> Now performing quality (cutoff '-q 30') and adapter trimming in a single pass for the adapter sequence: 'AGATGTGTATAAGAGACAG' from file ../0-fastq/24h_J_S7_L002_R1_001.fastq.gz <<< 
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/24h_J_S7_L002_R1_001.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 76.322 s (11.529 µs/read; 5.20 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               6,620,087
+Reads with adapters:                 2,010,137 (30.4%)
+Reads written (passing filters):     6,620,087 (100.0%)
+
+Total basepairs processed:   496,506,525 bp
+Quality-trimmed:              18,892,239 bp (3.8%)
+Total written (filtered):    474,812,086 bp (95.6%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 2010137 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 32.5%
+  C: 31.2%
+  G: 18.2%
+  T: 17.6%
+  none/other: 0.4%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	1422397	1655021.8	0	1422397
+2	441475	413755.4	0	441475
+3	106072	103438.9	0	106072
+4	28086	25859.7	0	28086
+5	9026	6464.9	0	9026
+6	1970	1616.2	0	1970
+7	473	404.1	0	473
+8	151	101.0	0	151
+9	178	25.3	0	28 150
+10	208	6.3	1	2 206
+11	83	1.6	1	0 83
+12	11	0.4	1	0 11
+13	4	0.1	1	0 4
+14	1	0.0	1	0 1
+15	1	0.0	1	0 1
+16	1	0.0	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/24h_J_S7_L002_R1_001.fastq.gz
+=============================================
+6620087 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	135442 (2.0%)
+
+Writing report to '/blazer/nv/jh3/2-trim/24h_J_S7_L003_R1_001.fastq.gz_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/24h_J_S7_L003_R1_001.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file(s) will be GZIP compressed
+
+Cutadapt seems to be fairly up-to-date (version 4.4). Setting -j -j 2
+Writing final adapter and quality trimmed output to 24h_J_S7_L003_R1_001_trimmed.fq.gz
+
+
+  >>> Now performing quality (cutoff '-q 30') and adapter trimming in a single pass for the adapter sequence: 'AGATGTGTATAAGAGACAG' from file ../0-fastq/24h_J_S7_L003_R1_001.fastq.gz <<< 
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/24h_J_S7_L003_R1_001.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 79.220 s (11.631 µs/read; 5.16 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               6,811,094
+Reads with adapters:                 2,066,807 (30.3%)
+Reads written (passing filters):     6,811,094 (100.0%)
+
+Total basepairs processed:   510,832,050 bp
+Quality-trimmed:              20,410,923 bp (4.0%)
+Total written (filtered):    487,542,011 bp (95.4%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 2066807 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 32.6%
+  C: 31.2%
+  G: 18.2%
+  T: 17.6%
+  none/other: 0.5%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	1464978	1702773.5	0	1464978
+2	450974	425693.4	0	450974
+3	109676	106423.3	0	109676
+4	28910	26605.8	0	28910
+5	9013	6651.5	0	9013
+6	2057	1662.9	0	2057
+7	507	415.7	0	507
+8	150	103.9	0	150
+9	207	26.0	0	46 161
+10	219	6.5	1	6 213
+11	88	1.6	1	0 88
+12	20	0.4	1	0 20
+13	7	0.1	1	0 7
+14	1	0.0	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/24h_J_S7_L003_R1_001.fastq.gz
+=============================================
+6811094 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	145578 (2.1%)
+
+Writing report to '/blazer/nv/jh3/2-trim/24h_J_S7_L004_R1_001.fastq.gz_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/24h_J_S7_L004_R1_001.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file(s) will be GZIP compressed
+
+Cutadapt seems to be fairly up-to-date (version 4.4). Setting -j -j 2
+Writing final adapter and quality trimmed output to 24h_J_S7_L004_R1_001_trimmed.fq.gz
+
+
+  >>> Now performing quality (cutoff '-q 30') and adapter trimming in a single pass for the adapter sequence: 'AGATGTGTATAAGAGACAG' from file ../0-fastq/24h_J_S7_L004_R1_001.fastq.gz <<< 
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/24h_J_S7_L004_R1_001.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 80.141 s (11.689 µs/read; 5.13 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               6,856,333
+Reads with adapters:                 2,086,242 (30.4%)
+Reads written (passing filters):     6,856,333 (100.0%)
+
+Total basepairs processed:   514,224,975 bp
+Quality-trimmed:              20,349,841 bp (4.0%)
+Total written (filtered):    490,970,696 bp (95.5%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 2086242 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 32.5%
+  C: 31.2%
+  G: 18.2%
+  T: 17.6%
+  none/other: 0.5%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	1480565	1714083.2	0	1480565
+2	453220	428520.8	0	453220
+3	110782	107130.2	0	110782
+4	29235	26782.6	0	29235
+5	9217	6695.6	0	9217
+6	2085	1673.9	0	2085
+7	495	418.5	0	495
+8	153	104.6	0	153
+9	197	26.2	0	32 165
+10	176	6.5	1	3 173
+11	93	1.6	1	0 93
+12	14	0.4	1	0 14
+13	5	0.1	1	0 5
+14	2	0.0	1	0 2
+15	2	0.0	1	0 2
+16	1	0.0	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/24h_J_S7_L004_R1_001.fastq.gz
+=============================================
+6856333 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	147302 (2.1%)
+

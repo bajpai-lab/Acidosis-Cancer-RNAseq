@@ -1,0 +1,11 @@
+	/opt/miniforge/envs/star/bin/STAR-avx2 --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/SiHa_A_S1_trimmed.fq.gz,../2-trim/SiHa_A_S2_trimmed.fq.gz,../2-trim/SiHa_A_S3_trimmed.fq.gz,../2-trim/SiHa_A_S4_trimmed.fq.gz --outFileNamePrefix SiHa_A --readFilesCommand zcat
+	STAR version: 2.7.11b   compiled: 2025-01-09T12:32:06+0000 :/opt/conda/conda-bld/star_1736425784849/work/source
+Mar 25 13:20:10 ..... started STAR run
+Mar 25 13:20:10 ..... loading genome
+Mar 25 13:20:27 ..... started mapping
+Mar 25 13:20:54 ..... finished mapping
+Mar 25 13:20:55 ..... finished successfully
+
+real	0m45.346s
+user	5m38.724s
+sys	0m21.874s

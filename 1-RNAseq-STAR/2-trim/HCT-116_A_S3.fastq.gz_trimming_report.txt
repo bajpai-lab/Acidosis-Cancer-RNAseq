@@ -1,0 +1,70 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/HCT-116_A_S3.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file will be GZIP compressed
+
+
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/HCT-116_A_S3.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 62.820 s (10.748 µs/read; 5.58 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               5,844,838
+Reads with adapters:                   772,559 (13.2%)
+Reads written (passing filters):     5,844,838 (100.0%)
+
+Total basepairs processed:   441,348,648 bp
+Quality-trimmed:               5,659,998 bp (1.3%)
+Total written (filtered):    434,649,167 bp (98.5%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 772559 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 36.2%
+  C: 26.2%
+  G: 18.6%
+  T: 18.9%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	623477	1461209.5	0	623477
+2	74559	365302.4	0	74559
+3	52322	91325.6	0	52322
+4	7676	22831.4	0	7676
+5	11123	5707.8	0	11123
+6	2038	1427.0	0	2038
+7	638	356.7	0	638
+8	141	89.2	0	141
+9	218	22.3	0	10 208
+10	245	5.6	1	5 240
+11	103	1.4	1	0 103
+12	13	0.3	1	0 13
+13	5	0.1	1	0 5
+15	1	0.0	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/HCT-116_A_S3.fastq.gz
+=============================================
+5844838 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	35511 (0.6%)
+

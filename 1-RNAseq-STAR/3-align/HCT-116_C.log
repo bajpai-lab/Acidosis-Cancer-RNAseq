@@ -1,0 +1,11 @@
+	/opt/miniforge/envs/star/bin/STAR-avx2 --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/HCT-116_C_S1_trimmed.fq.gz,../2-trim/HCT-116_C_S2_trimmed.fq.gz,../2-trim/HCT-116_C_S3_trimmed.fq.gz,../2-trim/HCT-116_C_S4_trimmed.fq.gz --outFileNamePrefix HCT-116_C --readFilesCommand zcat
+	STAR version: 2.7.11b   compiled: 2025-01-09T12:32:06+0000 :/opt/conda/conda-bld/star_1736425784849/work/source
+Mar 25 13:19:24 ..... started STAR run
+Mar 25 13:19:24 ..... loading genome
+Mar 25 13:19:41 ..... started mapping
+Mar 25 13:20:08 ..... finished mapping
+Mar 25 13:20:10 ..... finished successfully
+
+real	0m46.463s
+user	5m49.897s
+sys	0m21.992s

@@ -1,0 +1,11 @@
+	/opt/miniforge/envs/star/bin/STAR-avx2 --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/23d_7_4_3_S22_L001_R1_001_trimmed.fq.gz --outFileNamePrefix 23d_7_4_3 --readFilesCommand zcat
+	STAR version: 2.7.11b   compiled: 2025-01-09T12:32:06+0000 :/opt/conda/conda-bld/star_1736425784849/work/source
+Mar 25 13:14:24 ..... started STAR run
+Mar 25 13:14:24 ..... loading genome
+Mar 25 13:14:41 ..... started mapping
+Mar 25 13:15:39 ..... finished mapping
+Mar 25 13:15:41 ..... finished successfully
+
+real	1m17.768s
+user	12m52.903s
+sys	0m25.607s

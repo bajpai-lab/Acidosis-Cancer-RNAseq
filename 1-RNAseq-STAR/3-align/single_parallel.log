@@ -1,0 +1,7 @@
+Seq	Host	Starttime	JobRuntime	Send	Receive	Exitval	Signal	Command
+4	:	1742938486.114	   126.424	0	566	0	0	(time (/opt/miniforge/envs/star/bin/STAR --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/SUM_N1*.fq.gz --outFileNamePrefix SUM_N1 --readFilesCommand zcat)) 2>&1 | tee SUM_N1.log
+3	:	1742938486.112	   131.411	0	567	0	0	(time (/opt/miniforge/envs/star/bin/STAR --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/SUM_A3*.fq.gz --outFileNamePrefix SUM_A3 --readFilesCommand zcat)) 2>&1 | tee SUM_A3.log
+2	:	1742938486.109	   159.314	0	566	0	0	(time (/opt/miniforge/envs/star/bin/STAR --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/SUM_A2*.fq.gz --outFileNamePrefix SUM_A2 --readFilesCommand zcat)) 2>&1 | tee SUM_A2.log
+1	:	1742938486.105	   219.023	0	567	0	0	(time (/opt/miniforge/envs/star/bin/STAR --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/SUM_A1*.fq.gz --outFileNamePrefix SUM_A1 --readFilesCommand zcat)) 2>&1 | tee SUM_A1.log
+5	:	1742938612.552	   121.302	0	566	0	0	(time (/opt/miniforge/envs/star/bin/STAR --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/SUM_N2*.fq.gz --outFileNamePrefix SUM_N2 --readFilesCommand zcat)) 2>&1 | tee SUM_N2.log
+6	:	1742938617.526	   197.405	0	567	0	0	(time (/opt/miniforge/envs/star/bin/STAR --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/SUM_N3*.fq.gz --outFileNamePrefix SUM_N3 --readFilesCommand zcat)) 2>&1 | tee SUM_N3.log

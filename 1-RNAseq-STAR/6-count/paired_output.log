@@ -1,0 +1,96 @@
+
+        ==========     _____ _    _ ____  _____  ______          _____  
+        =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+          =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+            ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+              ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+        ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+	  v2.0.8
+
+//========================== featureCounts setting ===========================\\
+||                                                                            ||
+||             Input files : 6 BAM files                                      ||
+||                                                                            ||
+||                           SUM_A1_sorted.bam                                ||
+||                           SUM_A2_sorted.bam                                ||
+||                           SUM_A3_sorted.bam                                ||
+||                           SUM_N1_sorted.bam                                ||
+||                           SUM_N2_sorted.bam                                ||
+||                           SUM_N3_sorted.bam                                ||
+||                                                                            ||
+||             Output file : count_matrix_paired.tsv                          ||
+||                 Summary : count_matrix_paired.tsv.summary                  ||
+||              Paired-end : yes                                              ||
+||        Count read pairs : no                                               ||
+||              Annotation : gencode.v44.chr_patch_hapl_scaff.annotation. ... ||
+||      Dir for temp files : ./                                               ||
+||                                                                            ||
+||                 Threads : 60                                               ||
+||                   Level : meta-feature level                               ||
+||      Multimapping reads : not counted                                      ||
+|| Multi-overlapping reads : not counted                                      ||
+||   Min overlapping bases : 1                                                ||
+||                                                                            ||
+\\============================================================================//
+
+//================================= Running ==================================\\
+||                                                                            ||
+|| Load annotation file gencode.v44.chr_patch_hapl_scaff.annotation.gtf ...   ||
+||    Features : 1788960                                                      ||
+||    Meta-features : 63241                                                   ||
+||    Chromosomes/contigs : 505                                               ||
+||                                                                            ||
+|| Process BAM file SUM_A1_sorted.bam...                                      ||
+||    Paired-end reads are included.                                          ||
+||    The reads are assigned on the single-end mode.                          ||
+||    Total alignments : 202399049                                            ||
+||    Successfully assigned alignments : 129981377 (64.2%)                    ||
+||    Running time : 0.06 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SUM_A2_sorted.bam...                                      ||
+||    Paired-end reads are included.                                          ||
+||    The reads are assigned on the single-end mode.                          ||
+||    Total alignments : 129158479                                            ||
+||    Successfully assigned alignments : 82473298 (63.9%)                     ||
+||    Running time : 0.04 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SUM_A3_sorted.bam...                                      ||
+||    Paired-end reads are included.                                          ||
+||    The reads are assigned on the single-end mode.                          ||
+||    Total alignments : 104902659                                            ||
+||    Successfully assigned alignments : 63506159 (60.5%)                     ||
+||    Running time : 0.04 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SUM_N1_sorted.bam...                                      ||
+||    Paired-end reads are included.                                          ||
+||    The reads are assigned on the single-end mode.                          ||
+||    Total alignments : 95008523                                             ||
+||    Successfully assigned alignments : 60737199 (63.9%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SUM_N2_sorted.bam...                                      ||
+||    Paired-end reads are included.                                          ||
+||    The reads are assigned on the single-end mode.                          ||
+||    Total alignments : 119543263                                            ||
+||    Successfully assigned alignments : 75618336 (63.3%)                     ||
+||    Running time : 0.04 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SUM_N3_sorted.bam...                                      ||
+||    Paired-end reads are included.                                          ||
+||    The reads are assigned on the single-end mode.                          ||
+||    Total alignments : 221858679                                            ||
+||    Successfully assigned alignments : 138557551 (62.5%)                    ||
+||    Running time : 0.06 minutes                                             ||
+||                                                                            ||
+|| Write the final count table.                                               ||
+|| Write the read assignment summary.                                         ||
+||                                                                            ||
+|| Summary of counting results can be found in file "count_matrix_paired.tsv  ||
+|| .summary"                                                                  ||
+||                                                                            ||
+\\============================================================================//
+
+
+real	0m20.339s
+user	8m5.207s
+sys	0m12.296s

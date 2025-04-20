@@ -1,0 +1,70 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/24h_A_S1_L002_R1_001.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file will be GZIP compressed
+
+
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/24h_A_S1_L002_R1_001.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 114.432 s (11.002 µs/read; 5.45 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:              10,400,566
+Reads with adapters:                 3,231,430 (31.1%)
+Reads written (passing filters):    10,400,566 (100.0%)
+
+Total basepairs processed:   780,042,450 bp
+Quality-trimmed:              19,728,339 bp (2.5%)
+Total written (filtered):    755,790,167 bp (96.9%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 3231430 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 31.6%
+  C: 32.8%
+  G: 18.3%
+  T: 17.3%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	2279146	2600141.5	0	2279146
+2	710789	650035.4	0	710789
+3	173873	162508.8	0	173873
+4	47265	40627.2	0	47265
+5	13945	10156.8	0	13945
+6	4626	2539.2	0	4626
+7	843	634.8	0	843
+8	137	158.7	0	137
+9	250	39.7	0	12 238
+10	398	9.9	1	5 393
+11	100	2.5	1	12 88
+12	34	0.6	1	0 34
+13	11	0.2	1	0 11
+14	13	0.0	1	0 13
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/24h_A_S1_L002_R1_001.fastq.gz
+=============================================
+10400566 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	124962 (1.2%)
+

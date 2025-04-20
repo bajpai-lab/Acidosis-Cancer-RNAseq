@@ -1,0 +1,15 @@
+Status	../5-sort/SUM_A1_sorted.bam	../5-sort/SUM_A2_sorted.bam	../5-sort/SUM_A3_sorted.bam	../5-sort/SUM_N1_sorted.bam	../5-sort/SUM_N2_sorted.bam	../5-sort/SUM_N3_sorted.bam
+Assigned	129981377	82473298	63506159	60737199	75618336	138557551
+Unassigned_Unmapped	0	0	0	0	0	0
+Unassigned_Read_Type	0	0	0	0	0	0
+Unassigned_Singleton	0	0	0	0	0	0
+Unassigned_MappingQuality	0	0	0	0	0	0
+Unassigned_Chimera	0	0	0	0	0	0
+Unassigned_FragmentLength	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0
+Unassigned_MultiMapping	53876614	35116716	30365968	25040219	32835719	60988032
+Unassigned_Secondary	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0
+Unassigned_NoFeatures	6624339	3921091	5145103	3659973	3969116	9927287
+Unassigned_Overlapping_Length	0	0	0	0	0	0
+Unassigned_Ambiguity	11916719	7647374	5885429	5571132	7120092	12385809

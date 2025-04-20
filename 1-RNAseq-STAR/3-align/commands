@@ -1,0 +1,5 @@
+# Unpaired
+ls ../2-trim/*.gz | grep -Pv "/SUM" | sed -r 's/^(.*\/[^_]+_.+)_S[0-9].*gz$/\1/g' | sort -u | parallel --progress --joblog unpaired_parallel.log -j 4 "(time (/opt/miniforge/envs/star/bin/STAR --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn \$(ls -1 {}*.fq.gz | paste -sd ',' -) --outFileNamePrefix {/} --readFilesCommand zcat)) 2>&1 | tee {/.}.log"
+
+# Paired end
+ls ../2-trim/*.gz | grep -P "/SUM" | sed -r 's/^(.*)_R[12].*.gz/\1/g' | sort -u | parallel --progress --joblog single_parallel.log -j 4 "(time (/opt/miniforge/envs/star/bin/STAR --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn {}*.fq.gz --outFileNamePrefix {/} --readFilesCommand zcat)) 2>&1 | tee {/.}.log"

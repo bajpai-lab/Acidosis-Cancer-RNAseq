@@ -1,0 +1,88 @@
+Path to Cutadapt set as: '/home/lexic/.conda/envs/pre/bin/cutadapt' (user defined)
+Cutadapt seems to be working fine (tested command '/home/lexic/.conda/envs/pre/bin/cutadapt --version')
+Cutadapt version: 4.4
+Could not detect version of Python used by Cutadapt from the first line of Cutadapt (but found this: >>>#!/bin/sh<<<)
+Letting the (modified) Cutadapt deal with the Python version instead
+pigz 2.8
+Parallel gzip (pigz) detected. Proceeding with multicore (de)compression using 2 cores
+
+Proceeding with 'pigz -p 2' for decompression
+To decrease CPU usage of decompression, please install 'igzip' and run again
+
+No quality encoding type selected. Assuming that the data provided uses Sanger encoded Phred scores (default)
+
+Output will be written into the directory: /blazer/nv/jh3/2-trim/
+Writing report to '/blazer/nv/jh3/2-trim/SiHa_C_S3.fastq.gz_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/SiHa_C_S3.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file(s) will be GZIP compressed
+
+Cutadapt seems to be fairly up-to-date (version 4.4). Setting -j 2
+Writing final adapter and quality trimmed output to SiHa_C_S3_trimmed.fq.gz
+
+
+  >>> Now performing quality (cutoff '-q 30') and adapter trimming in a single pass for the adapter sequence: 'AGATGTGTATAAGAGACAG' from file ../0-fastq/SiHa_C_S3.fastq.gz <<< 
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/SiHa_C_S3.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 60.332 s (10.515 µs/read; 5.71 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               5,737,557
+Reads with adapters:                   731,782 (12.8%)
+Reads written (passing filters):     5,737,557 (100.0%)
+
+Total basepairs processed:   433,326,400 bp
+Quality-trimmed:               5,889,151 bp (1.4%)
+Total written (filtered):    426,449,082 bp (98.4%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 731782 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 36.0%
+  C: 27.1%
+  G: 19.2%
+  T: 17.7%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	588136	1434389.2	0	588136
+2	72597	358597.3	0	72597
+3	49793	89649.3	0	49793
+4	6840	22412.3	0	6840
+5	11126	5603.1	0	11126
+6	2053	1400.8	0	2053
+7	611	350.2	0	611
+8	151	87.5	0	151
+9	193	21.9	0	9 184
+10	193	5.5	1	8 185
+11	71	1.4	1	0 71
+12	17	0.3	1	0 17
+13	1	0.1	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/SiHa_C_S3.fastq.gz
+=============================================
+5737557 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	36385 (0.6%)
+

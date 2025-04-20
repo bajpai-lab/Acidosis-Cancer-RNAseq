@@ -1,0 +1,71 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/FaDu_A_S2.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file will be GZIP compressed
+
+
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/FaDu_A_S2.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 56.789 s (10.695 µs/read; 5.61 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               5,309,883
+Reads with adapters:                   683,360 (12.9%)
+Reads written (passing filters):     5,309,883 (100.0%)
+
+Total basepairs processed:   400,671,507 bp
+Quality-trimmed:               5,518,718 bp (1.4%)
+Total written (filtered):    394,224,035 bp (98.4%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 683360 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 35.5%
+  C: 26.6%
+  G: 19.6%
+  T: 18.2%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	544072	1327470.8	0	544072
+2	72275	331867.7	0	72275
+3	47067	82966.9	0	47067
+4	6940	20741.7	0	6940
+5	9764	5185.4	0	9764
+6	1961	1296.4	0	1961
+7	691	324.1	0	691
+8	127	81.0	0	127
+9	169	20.3	0	9 160
+10	209	5.1	1	6 203
+11	67	1.3	1	0 67
+12	12	0.3	1	0 12
+13	3	0.1	1	0 3
+65	1	0.0	1	1
+68	2	0.0	1	2
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/FaDu_A_S2.fastq.gz
+=============================================
+5309883 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	35952 (0.7%)
+

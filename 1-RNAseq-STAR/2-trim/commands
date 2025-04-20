@@ -1,0 +1,7 @@
+find ../0-fastq/*.fastq.gz | sed -r 's/^(.*_S[0-9]).*$/\1/g' | sort -u | parallel -j 28 \
+"/home/lexic/.conda/envs/pre/bin/trim_galore \
+--path_to_cutadapt /home/lexic/.conda/envs/pre/bin/cutadapt \
+-a 'CTGTCTCTTATACACATCT' \
+-a 'AGATGTGTATAAGAGACAG'  \
+-j 2 -q 30 {}*.gz \
+--gzip -o . > {/}.log 2>&1"

@@ -1,0 +1,90 @@
+Path to Cutadapt set as: '/home/lexic/.conda/envs/pre/bin/cutadapt' (user defined)
+Cutadapt seems to be working fine (tested command '/home/lexic/.conda/envs/pre/bin/cutadapt --version')
+Cutadapt version: 4.4
+Could not detect version of Python used by Cutadapt from the first line of Cutadapt (but found this: >>>#!/bin/sh<<<)
+Letting the (modified) Cutadapt deal with the Python version instead
+pigz 2.8
+Parallel gzip (pigz) detected. Proceeding with multicore (de)compression using 2 cores
+
+Proceeding with 'pigz -p 2' for decompression
+To decrease CPU usage of decompression, please install 'igzip' and run again
+
+No quality encoding type selected. Assuming that the data provided uses Sanger encoded Phred scores (default)
+
+Output will be written into the directory: /blazer/nv/jh3/2-trim/
+Writing report to '/blazer/nv/jh3/2-trim/FaDu_B_S4.fastq.gz_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/FaDu_B_S4.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file(s) will be GZIP compressed
+
+Cutadapt seems to be fairly up-to-date (version 4.4). Setting -j 2
+Writing final adapter and quality trimmed output to FaDu_B_S4_trimmed.fq.gz
+
+
+  >>> Now performing quality (cutoff '-q 30') and adapter trimming in a single pass for the adapter sequence: 'AGATGTGTATAAGAGACAG' from file ../0-fastq/FaDu_B_S4.fastq.gz <<< 
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/FaDu_B_S4.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 60.402 s (10.560 µs/read; 5.68 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               5,719,903
+Reads with adapters:                   733,973 (12.8%)
+Reads written (passing filters):     5,719,903 (100.0%)
+
+Total basepairs processed:   431,947,427 bp
+Quality-trimmed:               5,609,341 bp (1.3%)
+Total written (filtered):    425,344,771 bp (98.5%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 733973 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 35.5%
+  C: 26.3%
+  G: 19.7%
+  T: 18.3%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	588127	1429975.8	0	588127
+2	73949	357493.9	0	73949
+3	50621	89373.5	0	50621
+4	7479	22343.4	0	7479
+5	10162	5585.8	0	10162
+6	2248	1396.5	0	2248
+7	760	349.1	0	760
+8	142	87.3	0	142
+9	199	21.8	0	11 188
+10	206	5.5	1	12 194
+11	62	1.4	1	0 62
+12	13	0.3	1	0 13
+13	3	0.1	1	0 3
+14	1	0.0	1	0 1
+15	1	0.0	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/FaDu_B_S4.fastq.gz
+=============================================
+5719903 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	32846 (0.6%)
+

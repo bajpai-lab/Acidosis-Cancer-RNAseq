@@ -1,0 +1,69 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/HCT-116_A_S4.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file will be GZIP compressed
+
+
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/HCT-116_A_S4.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 63.154 s (10.864 µs/read; 5.52 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               5,813,241
+Reads with adapters:                   769,906 (13.2%)
+Reads written (passing filters):     5,813,241 (100.0%)
+
+Total basepairs processed:   438,965,445 bp
+Quality-trimmed:               5,836,122 bp (1.3%)
+Total written (filtered):    432,094,018 bp (98.4%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 769906 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 36.2%
+  C: 26.2%
+  G: 18.6%
+  T: 18.9%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	621293	1453310.2	0	621293
+2	74440	363327.6	0	74440
+3	52306	90831.9	0	52306
+4	7530	22708.0	0	7530
+5	10917	5677.0	0	10917
+6	2114	1419.2	0	2114
+7	639	354.8	0	639
+8	137	88.7	0	137
+9	179	22.2	0	15 164
+10	235	5.5	1	7 228
+11	98	1.4	1	1 97
+12	17	0.3	1	1 16
+13	1	0.1	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/HCT-116_A_S4.fastq.gz
+=============================================
+5813241 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	36660 (0.6%)
+

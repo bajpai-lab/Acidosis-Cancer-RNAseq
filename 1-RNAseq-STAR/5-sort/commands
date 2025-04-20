@@ -1,0 +1,1 @@
+ls ../4-sambam/*.bam | sed -r 's/^(.*\/[^_]+_.+)\.bam$/\1/g' | sort -u | parallel --progress --joblog parallel.log -j 8 "(time (/home/lexic/.conda/envs/samtools/bin/samtools sort -@ 7 -o {/}_sorted.bam {}.bam)) 2>&1 | tee {/.}.log"

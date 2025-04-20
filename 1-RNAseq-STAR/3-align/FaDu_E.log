@@ -1,0 +1,11 @@
+	/opt/miniforge/envs/star/bin/STAR-avx2 --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/FaDu_E_S1_trimmed.fq.gz,../2-trim/FaDu_E_S2_trimmed.fq.gz,../2-trim/FaDu_E_S3_trimmed.fq.gz,../2-trim/FaDu_E_S4_trimmed.fq.gz --outFileNamePrefix FaDu_E --readFilesCommand zcat
+	STAR version: 2.7.11b   compiled: 2025-01-09T12:32:06+0000 :/opt/conda/conda-bld/star_1736425784849/work/source
+Mar 25 13:18:37 ..... started STAR run
+Mar 25 13:18:37 ..... loading genome
+Mar 25 13:18:55 ..... started mapping
+Mar 25 13:19:22 ..... finished mapping
+Mar 25 13:19:23 ..... finished successfully
+
+real	0m46.776s
+user	5m52.030s
+sys	0m22.137s

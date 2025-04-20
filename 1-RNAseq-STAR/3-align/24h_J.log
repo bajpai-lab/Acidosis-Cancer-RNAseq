@@ -1,0 +1,11 @@
+	/opt/miniforge/envs/star/bin/STAR-avx2 --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/24h_J_S7_L001_R1_001_trimmed.fq.gz,../2-trim/24h_J_S7_L002_R1_001_trimmed.fq.gz,../2-trim/24h_J_S7_L003_R1_001_trimmed.fq.gz,../2-trim/24h_J_S7_L004_R1_001_trimmed.fq.gz --outFileNamePrefix 24h_J --readFilesCommand zcat
+	STAR version: 2.7.11b   compiled: 2025-01-09T12:32:06+0000 :/opt/conda/conda-bld/star_1736425784849/work/source
+Mar 25 13:15:55 ..... started STAR run
+Mar 25 13:15:55 ..... loading genome
+Mar 25 13:16:12 ..... started mapping
+Mar 25 13:16:58 ..... finished mapping
+Mar 25 13:16:59 ..... finished successfully
+
+real	1m5.004s
+user	10m6.455s
+sys	0m22.611s

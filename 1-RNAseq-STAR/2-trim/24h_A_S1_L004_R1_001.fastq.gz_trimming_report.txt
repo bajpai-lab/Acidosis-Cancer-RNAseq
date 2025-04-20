@@ -1,0 +1,70 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/24h_A_S1_L004_R1_001.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file will be GZIP compressed
+
+
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/24h_A_S1_L004_R1_001.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 99.717 s (9.495 µs/read; 6.32 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:              10,502,237
+Reads with adapters:                 3,247,039 (30.9%)
+Reads written (passing filters):    10,502,237 (100.0%)
+
+Total basepairs processed:   787,667,775 bp
+Quality-trimmed:              22,008,481 bp (2.8%)
+Total written (filtered):    761,118,085 bp (96.6%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 3247039 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 31.8%
+  C: 32.7%
+  G: 18.2%
+  T: 17.2%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	2295851	2625559.2	0	2295851
+2	708039	656389.8	0	708039
+3	174375	164097.5	0	174375
+4	48293	41024.4	0	48293
+5	14043	10256.1	0	14043
+6	4704	2564.0	0	4704
+7	812	641.0	0	812
+8	175	160.3	0	175
+9	244	40.1	0	7 237
+10	349	10.0	1	6 343
+11	103	2.5	1	6 97
+12	33	0.6	1	0 33
+13	7	0.2	1	0 7
+14	11	0.0	1	0 11
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/24h_A_S1_L004_R1_001.fastq.gz
+=============================================
+10502237 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	133714 (1.3%)
+

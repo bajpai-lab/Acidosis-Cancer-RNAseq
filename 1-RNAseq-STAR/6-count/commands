@@ -1,0 +1,8 @@
+# Single-end reads
+(time (/opt/miniforge/envs/star/bin/featureCounts -a /blazer/references/grch38/gencode.v44.chr_patch_hapl_scaff.annotation.gtf -T 60 -o count_matrix_single.tsv $(ls ../5-sort/*.bam | grep -v "/SUM") -g 'gene_name')) 2>&1 | tee single_output.log
+
+# Paired-end reads
+(time (/opt/miniforge/envs/star/bin/featureCounts -a /blazer/references/grch38/gencode.v44.chr_patch_hapl_scaff.annotation.gtf -T 60 -o count_matrix_paired.tsv -p $(ls ../5-sort/*.bam | grep "/SUM") -g 'gene_name')) 2>&1 | tee paired_output.log
+
+cat count_matrix_single.tsv | grep -Pv "^ENSG" | grep -Pv "#" > count_matrix_noENSG_single.tsv
+cat count_matrix_paired.tsv | grep -Pv "^ENSG" | grep -Pv "#" > count_matrix_noENSG_paired.tsv

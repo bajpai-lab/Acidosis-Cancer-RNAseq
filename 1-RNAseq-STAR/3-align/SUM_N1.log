@@ -1,0 +1,11 @@
+	/opt/miniforge/envs/star/bin/STAR-avx2 --runThreadN 15 --genomeDir /blazer/references/grch38 --readFilesIn ../2-trim/SUM_N1_R1.fq.gz ../2-trim/SUM_N1_R2.fq.gz --outFileNamePrefix SUM_N1 --readFilesCommand zcat
+	STAR version: 2.7.11b   compiled: 2025-01-09T12:32:06+0000 :/opt/conda/conda-bld/star_1736425784849/work/source
+Mar 25 16:34:46 ..... started STAR run
+Mar 25 16:34:46 ..... loading genome
+Mar 25 16:35:03 ..... started mapping
+Mar 25 16:36:48 ..... finished mapping
+Mar 25 16:36:52 ..... finished successfully
+
+real	2m6.422s
+user	23m14.682s
+sys	0m33.801s

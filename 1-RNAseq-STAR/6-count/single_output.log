@@ -1,0 +1,314 @@
+
+        ==========     _____ _    _ ____  _____  ______          _____  
+        =====         / ____| |  | |  _ \|  __ \|  ____|   /\   |  __ \ 
+          =====      | (___ | |  | | |_) | |__) | |__     /  \  | |  | |
+            ====      \___ \| |  | |  _ <|  _  /|  __|   / /\ \ | |  | |
+              ====    ____) | |__| | |_) | | \ \| |____ / ____ \| |__| |
+        ==========   |_____/ \____/|____/|_|  \_\______/_/    \_\_____/
+	  v2.0.8
+
+//========================== featureCounts setting ===========================\\
+||                                                                            ||
+||             Input files : 38 BAM files                                     ||
+||                                                                            ||
+||                           10w_6-4-1_sorted.bam                             ||
+||                           10w_6-4-2_sorted.bam                             ||
+||                           10w_6-4-3_sorted.bam                             ||
+||                           10w_7-4-1_sorted.bam                             ||
+||                           10w_7-4-2_sorted.bam                             ||
+||                           10w_7-4-3_sorted.bam                             ||
+||                           23d_6_4_1_sorted.bam                             ||
+||                           23d_6_4_2_sorted.bam                             ||
+||                           23d_6_4_3_sorted.bam                             ||
+||                           23d_7_4_1_sorted.bam                             ||
+||                           23d_7_4_2_sorted.bam                             ||
+||                           23d_7_4_3_sorted.bam                             ||
+||                           24h_A_sorted.bam                                 ||
+||                           24h_C_sorted.bam                                 ||
+||                           24h_G_sorted.bam                                 ||
+||                           24h_I_sorted.bam                                 ||
+||                           24h_J_sorted.bam                                 ||
+||                           24h_L_sorted.bam                                 ||
+||                           24h_M_sorted.bam                                 ||
+||                           24h_O_sorted.bam                                 ||
+||                           FaDu_A_sorted.bam                                ||
+||                           FaDu_B_sorted.bam                                ||
+||                           FaDu_C_sorted.bam                                ||
+||                           FaDu_D_sorted.bam                                ||
+||                           FaDu_E_sorted.bam                                ||
+||                           FaDu_F_sorted.bam                                ||
+||                           HCT-116_A_sorted.bam                             ||
+||                           HCT-116_B_sorted.bam                             ||
+||                           HCT-116_C_sorted.bam                             ||
+||                           HCT-116_D_sorted.bam                             ||
+||                           HCT-116_E_sorted.bam                             ||
+||                           HCT-116_F_sorted.bam                             ||
+||                           SiHa_A_sorted.bam                                ||
+||                           SiHa_B_sorted.bam                                ||
+||                           SiHa_C_sorted.bam                                ||
+||                           SiHa_D_sorted.bam                                ||
+||                           SiHa_E_sorted.bam                                ||
+||                           SiHa_F_sorted.bam                                ||
+||                                                                            ||
+||             Output file : count_matrix_single.tsv                          ||
+||                 Summary : count_matrix_single.tsv.summary                  ||
+||              Paired-end : no                                               ||
+||        Count read pairs : no                                               ||
+||              Annotation : gencode.v44.chr_patch_hapl_scaff.annotation. ... ||
+||      Dir for temp files : ./                                               ||
+||                                                                            ||
+||                 Threads : 60                                               ||
+||                   Level : meta-feature level                               ||
+||      Multimapping reads : not counted                                      ||
+|| Multi-overlapping reads : not counted                                      ||
+||   Min overlapping bases : 1                                                ||
+||                                                                            ||
+\\============================================================================//
+
+//================================= Running ==================================\\
+||                                                                            ||
+|| Load annotation file gencode.v44.chr_patch_hapl_scaff.annotation.gtf ...   ||
+||    Features : 1788960                                                      ||
+||    Meta-features : 63241                                                   ||
+||    Chromosomes/contigs : 505                                               ||
+||                                                                            ||
+|| Process BAM file 10w_6-4-1_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 43429966                                             ||
+||    Successfully assigned alignments : 25331083 (58.3%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 10w_6-4-2_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 45016783                                             ||
+||    Successfully assigned alignments : 25147914 (55.9%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 10w_6-4-3_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 109162340                                            ||
+||    Successfully assigned alignments : 62448406 (57.2%)                     ||
+||    Running time : 0.04 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 10w_7-4-1_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 38799388                                             ||
+||    Successfully assigned alignments : 21814730 (56.2%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 10w_7-4-2_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 44736267                                             ||
+||    Successfully assigned alignments : 25473199 (56.9%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 10w_7-4-3_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 46848943                                             ||
+||    Successfully assigned alignments : 26469608 (56.5%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 23d_6_4_1_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 59364567                                             ||
+||    Successfully assigned alignments : 32814668 (55.3%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 23d_6_4_2_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 41457954                                             ||
+||    Successfully assigned alignments : 21790899 (52.6%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 23d_6_4_3_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 53646366                                             ||
+||    Successfully assigned alignments : 30052423 (56.0%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 23d_7_4_1_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 53256523                                             ||
+||    Successfully assigned alignments : 28761653 (54.0%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 23d_7_4_2_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 61791920                                             ||
+||    Successfully assigned alignments : 27135961 (43.9%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 23d_7_4_3_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 61816517                                             ||
+||    Successfully assigned alignments : 33859103 (54.8%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24h_A_sorted.bam...                                       ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 56007912                                             ||
+||    Successfully assigned alignments : 30072251 (53.7%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24h_C_sorted.bam...                                       ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 68293916                                             ||
+||    Successfully assigned alignments : 37292025 (54.6%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24h_G_sorted.bam...                                       ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 79010153                                             ||
+||    Successfully assigned alignments : 42494007 (53.8%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24h_I_sorted.bam...                                       ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 83378214                                             ||
+||    Successfully assigned alignments : 45342398 (54.4%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24h_J_sorted.bam...                                       ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 37364890                                             ||
+||    Successfully assigned alignments : 18624726 (49.8%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24h_L_sorted.bam...                                       ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 70477270                                             ||
+||    Successfully assigned alignments : 36947280 (52.4%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24h_M_sorted.bam...                                       ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 73206907                                             ||
+||    Successfully assigned alignments : 38939018 (53.2%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file 24h_O_sorted.bam...                                       ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 51923143                                             ||
+||    Successfully assigned alignments : 27531414 (53.0%)                     ||
+||    Running time : 0.03 minutes                                             ||
+||                                                                            ||
+|| Process BAM file FaDu_A_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 30045120                                             ||
+||    Successfully assigned alignments : 14187163 (47.2%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file FaDu_B_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 30314053                                             ||
+||    Successfully assigned alignments : 15207113 (50.2%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file FaDu_C_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 27073811                                             ||
+||    Successfully assigned alignments : 13477056 (49.8%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file FaDu_D_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 29754682                                             ||
+||    Successfully assigned alignments : 14712672 (49.4%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file FaDu_E_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 28222801                                             ||
+||    Successfully assigned alignments : 14510392 (51.4%)                     ||
+||    Running time : 0.01 minutes                                             ||
+||                                                                            ||
+|| Process BAM file FaDu_F_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 30717304                                             ||
+||    Successfully assigned alignments : 15000083 (48.8%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file HCT-116_A_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 35795985                                             ||
+||    Successfully assigned alignments : 13082495 (36.5%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file HCT-116_B_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 31711999                                             ||
+||    Successfully assigned alignments : 12566985 (39.6%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file HCT-116_C_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 28992890                                             ||
+||    Successfully assigned alignments : 13029191 (44.9%)                     ||
+||    Running time : 0.01 minutes                                             ||
+||                                                                            ||
+|| Process BAM file HCT-116_D_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 28218706                                             ||
+||    Successfully assigned alignments : 13416506 (47.5%)                     ||
+||    Running time : 0.01 minutes                                             ||
+||                                                                            ||
+|| Process BAM file HCT-116_E_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 24132968                                             ||
+||    Successfully assigned alignments : 11910746 (49.4%)                     ||
+||    Running time : 0.01 minutes                                             ||
+||                                                                            ||
+|| Process BAM file HCT-116_F_sorted.bam...                                   ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 30203770                                             ||
+||    Successfully assigned alignments : 14539956 (48.1%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SiHa_A_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 31027795                                             ||
+||    Successfully assigned alignments : 13018618 (42.0%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SiHa_B_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 26147854                                             ||
+||    Successfully assigned alignments : 13450161 (51.4%)                     ||
+||    Running time : 0.01 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SiHa_C_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 31995687                                             ||
+||    Successfully assigned alignments : 14928696 (46.7%)                     ||
+||    Running time : 0.02 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SiHa_D_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 25291373                                             ||
+||    Successfully assigned alignments : 13952606 (55.2%)                     ||
+||    Running time : 0.01 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SiHa_E_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 27509626                                             ||
+||    Successfully assigned alignments : 15459670 (56.2%)                     ||
+||    Running time : 0.01 minutes                                             ||
+||                                                                            ||
+|| Process BAM file SiHa_F_sorted.bam...                                      ||
+||    Single-end reads are included.                                          ||
+||    Total alignments : 25970255                                             ||
+||    Successfully assigned alignments : 14447414 (55.6%)                     ||
+||    Running time : 0.01 minutes                                             ||
+||                                                                            ||
+|| Write the final count table.                                               ||
+|| Write the read assignment summary.                                         ||
+||                                                                            ||
+|| Summary of counting results can be found in file "count_matrix_single.tsv  ||
+|| .summary"                                                                  ||
+||                                                                            ||
+\\============================================================================//
+
+
+real	0m52.348s
+user	14m59.376s
+sys	0m30.200s

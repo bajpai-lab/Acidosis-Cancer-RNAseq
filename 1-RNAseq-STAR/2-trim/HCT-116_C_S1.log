@@ -1,0 +1,89 @@
+Path to Cutadapt set as: '/home/lexic/.conda/envs/pre/bin/cutadapt' (user defined)
+Cutadapt seems to be working fine (tested command '/home/lexic/.conda/envs/pre/bin/cutadapt --version')
+Cutadapt version: 4.4
+Could not detect version of Python used by Cutadapt from the first line of Cutadapt (but found this: >>>#!/bin/sh<<<)
+Letting the (modified) Cutadapt deal with the Python version instead
+pigz 2.8
+Parallel gzip (pigz) detected. Proceeding with multicore (de)compression using 2 cores
+
+Proceeding with 'pigz -p 2' for decompression
+To decrease CPU usage of decompression, please install 'igzip' and run again
+
+No quality encoding type selected. Assuming that the data provided uses Sanger encoded Phred scores (default)
+
+Output will be written into the directory: /blazer/nv/jh3/2-trim/
+Writing report to '/blazer/nv/jh3/2-trim/HCT-116_C_S1.fastq.gz_trimming_report.txt'
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/HCT-116_C_S1.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file(s) will be GZIP compressed
+
+Cutadapt seems to be fairly up-to-date (version 4.4). Setting -j 2
+Writing final adapter and quality trimmed output to HCT-116_C_S1_trimmed.fq.gz
+
+
+  >>> Now performing quality (cutoff '-q 30') and adapter trimming in a single pass for the adapter sequence: 'AGATGTGTATAAGAGACAG' from file ../0-fastq/HCT-116_C_S1.fastq.gz <<< 
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/HCT-116_C_S1.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 54.228 s (10.780 µs/read; 5.57 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               5,030,477
+Reads with adapters:                   635,233 (12.6%)
+Reads written (passing filters):     5,030,477 (100.0%)
+
+Total basepairs processed:   379,785,772 bp
+Quality-trimmed:               4,676,258 bp (1.2%)
+Total written (filtered):    374,247,686 bp (98.5%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 635233 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 34.9%
+  C: 26.5%
+  G: 19.9%
+  T: 18.7%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	507345	1257619.2	0	507345
+2	65543	314404.8	0	65543
+3	43656	78601.2	0	43656
+4	6375	19650.3	0	6375
+5	9379	4912.6	0	9379
+6	1858	1228.1	0	1858
+7	563	307.0	0	563
+8	108	76.8	0	108
+9	130	19.2	0	8 122
+10	189	4.8	1	10 179
+11	76	1.2	1	0 76
+12	7	0.3	1	1 6
+13	3	0.1	1	0 3
+62	1	0.0	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/HCT-116_C_S1.fastq.gz
+=============================================
+5030477 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	30115 (0.6%)
+

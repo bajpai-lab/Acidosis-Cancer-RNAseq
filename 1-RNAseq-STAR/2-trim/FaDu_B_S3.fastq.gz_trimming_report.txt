@@ -1,0 +1,69 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ../0-fastq/FaDu_B_S3.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.4
+Python version: could not detect
+Number of cores used for trimming: 2
+Quality Phred score cutoff: 30
+Quality encoding type selected: ASCII+33
+Adapter sequence: 'AGATGTGTATAAGAGACAG' (user defined)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Output file will be GZIP compressed
+
+
+This is cutadapt 4.4 with Python 3.10.12
+Command line parameters: -j 2 -e 0.1 -q 30 -O 1 -a AGATGTGTATAAGAGACAG ../0-fastq/FaDu_B_S3.fastq.gz
+Processing single-end reads on 2 cores ...
+Finished in 61.518 s (10.714 µs/read; 5.60 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               5,741,640
+Reads with adapters:                   734,390 (12.8%)
+Reads written (passing filters):     5,741,640 (100.0%)
+
+Total basepairs processed:   433,586,333 bp
+Quality-trimmed:               5,488,239 bp (1.3%)
+Total written (filtered):    427,102,141 bp (98.5%)
+
+=== Adapter 1 ===
+
+Sequence: AGATGTGTATAAGAGACAG; Type: regular 3'; Length: 19; Trimmed: 734390 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Bases preceding removed adapters:
+  A: 35.6%
+  C: 26.2%
+  G: 19.7%
+  T: 18.4%
+  none/other: 0.1%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	588012	1435410.0	0	588012
+2	73733	358852.5	0	73733
+3	50962	89713.1	0	50962
+4	7470	22428.3	0	7470
+5	10611	5607.1	0	10611
+6	2140	1401.8	0	2140
+7	826	350.4	0	826
+8	136	87.6	0	136
+9	177	21.9	0	3 174
+10	214	5.5	1	10 204
+11	98	1.4	1	0 98
+12	10	0.3	1	0 10
+13	1	0.1	1	0 1
+
+RUN STATISTICS FOR INPUT FILE: ../0-fastq/FaDu_B_S3.fastq.gz
+=============================================
+5741640 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	32305 (0.6%)
+
