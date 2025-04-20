@@ -262,8 +262,8 @@ library(gtsummary)
       genes_up <- genes[genes$log2FoldChange.MDA24h10w_24h > 0 &
                           genes$log2FoldChange.MDA24h10w_10w > 0,]
       genes_up_TCGAbetter <- genes_up[genes_up$gene_name %in% survival_genes_better,]
-      genes_up_TCGAbetter0.1 <- genes_up[genes_up$gene_name %in% colnames(survivaldf),]
-      write_csv(x = genes_up_TCGAbetter0.1, file = "UP_TCGAbetter0.1.csv")
+      genes_up_TCGAp0.1 <- genes_up[genes_up$gene_name %in% colnames(survivaldf),]
+      write_csv(x = genes_up_TCGAp0.1, file = "UP_TCGAp0.1.csv")
       
       # Running genes
       plot_survival_curve(genes=genes_up, out_path=out_path, tag="planA_BOTHfcUP_NOprog", palette = c("#44546a","#1cbdc3"))
@@ -277,8 +277,8 @@ library(gtsummary)
       genes_down <- genes[genes$log2FoldChange.MDA24h10w_24h < 0 &
                             genes$log2FoldChange.MDA24h10w_10w < 0,]
       genes_down_TCGAworse <- genes_down[genes_down$gene_name %in% survival_genes_worse,]
-      genes_down_TCGAworse0.1 <- genes_down[genes_down$gene_name %in% colnames(survivaldf),]
-      write_csv(x = genes_down_TCGAworse0.1, file = "DOWN_TCGAworse0.1.csv")
+      genes_down_TCGAp0.1 <- genes_down[genes_down$gene_name %in% colnames(survivaldf),]
+      write_csv(x = genes_down_TCGAp0.1, file = "DOWN_TCGAp0.1.csv")
       
       # Running genes
       plot_survival_curve(genes=genes_down, out_path=out_path, tag="planA_BOTHfcDOWN_NOprog", palette = c("#f3766e", "#4472c4"))
