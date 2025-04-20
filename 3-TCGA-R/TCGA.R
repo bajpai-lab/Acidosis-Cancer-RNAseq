@@ -113,18 +113,19 @@ library(gtsummary)
       df2s <- df2s$coefficients
       df2s <- exp(df2s)
       ## If the survival pvalue is smaller than 0.05, the gene is considered significant.
-      #Prognostic significant genes: HR>=1.2 p<=0.05
-      if (surv_pvalue(fit)$pval <= 0.05) {
+      if (surv_pvalue(fit)$pval <= 0.1) {
         # Overwrite existing survivaldf to append high/low tpm data for this gene
         survivaldf[gene] <- data.cut$tpm
-        if (df2s>=1.2) {
-          survival_genes_worse <- append(survival_genes_worse, gene)
-        }
-        if (df2s<=1/1.2){
-          survival_genes_better <- append(survival_genes_better,gene)
+        if (surv_pvalue(fit)$pval <= 0.05) {
+          #Prognostic significant genes: HR>=1.2 p<=0.05
+          if (df2s>=1.2) {
+            survival_genes_worse <- append(survival_genes_worse, gene)
+          }
+          if (df2s<=1/1.2){
+            survival_genes_better <- append(survival_genes_better,gene)
+          }
         }
       }
-      
       rm(gene, tpms, df, cut, data.cut, fit, df2s)
     }
     write.table(survival_genes_better,"survivalanalysis/Prognostic_better_outcome_genes_0.05q_1.2HR.csv", sep=",", col.names = F, row.names = F, quote = F)
@@ -253,7 +254,7 @@ library(gtsummary)
   
   # Creating Kaplan-Meier curves for our DESeq analysis hits (filtering using prognosis genes)
   {
-    genes <- read_csv("../3-DESeq-R/results/intersect_PlanA_(10w)U(24h)_BOTH-FC-by-acidosis_0.1FDR.csv")
+    genes <- read_csv("../2-DESeq-R/results/intersect_PlanA_(10w)U(24h)_BOTH-FC-by-acidosis_0.1FDR.csv")
     out_path = "PlanA/"
     
     # Activated by acidosis
@@ -261,6 +262,8 @@ library(gtsummary)
       genes_up <- genes[genes$log2FoldChange.MDA24h10w_24h > 0 &
                           genes$log2FoldChange.MDA24h10w_10w > 0,]
       genes_up_TCGAbetter <- genes_up[genes_up$gene_name %in% survival_genes_better,]
+      genes_up_TCGAbetter0.1 <- genes_up[genes_up$gene_name %in% colnames(survivaldf),]
+      write_csv(x = genes_up_TCGAbetter0.1, file = "UP_TCGAbetter0.1.csv")
       
       # Running genes
       plot_survival_curve(genes=genes_up, out_path=out_path, tag="planA_BOTHfcUP_NOprog", palette = c("#44546a","#1cbdc3"))
@@ -269,12 +272,13 @@ library(gtsummary)
       plot_survival_curve(genes=genes_up_TCGAbetter, out_path=out_path, tag="planA_BOTHfcUP_progBETTER", palette = c("#44546a","#1cbdc3"))
     }
     
-    
     # Repressed by acidosis
     {
       genes_down <- genes[genes$log2FoldChange.MDA24h10w_24h < 0 &
                             genes$log2FoldChange.MDA24h10w_10w < 0,]
       genes_down_TCGAworse <- genes_down[genes_down$gene_name %in% survival_genes_worse,]
+      genes_down_TCGAworse0.1 <- genes_down[genes_down$gene_name %in% colnames(survivaldf),]
+      write_csv(x = genes_down_TCGAworse0.1, file = "DOWN_TCGAworse0.1.csv")
       
       # Running genes
       plot_survival_curve(genes=genes_down, out_path=out_path, tag="planA_BOTHfcDOWN_NOprog", palette = c("#f3766e", "#4472c4"))
