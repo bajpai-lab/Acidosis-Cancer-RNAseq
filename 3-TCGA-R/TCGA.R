@@ -12,15 +12,17 @@ rm(list=ls())
 # BiocManager::install("SummarizedExperiment")
 # install.packages("gtsummary")
 # install.packages("broom.helpers")
-library(SummarizedExperiment)
-library(DT)
-library(TCGAbiolinks)
-library(tidyverse)
-library(org.Hs.eg.db)
-library(survival)
-library(survminer)
-library(readxl)
-library(gtsummary)
+{
+  library(SummarizedExperiment)
+  library(DT)
+  library(TCGAbiolinks)
+  library(tidyverse)
+  library(org.Hs.eg.db)
+  library(survival)
+  library(survminer)
+  library(readxl)
+  library(gtsummary)
+}
 
 # Acquiring TCGA datasets
 {
@@ -202,8 +204,7 @@ library(gtsummary)
                       xlim = c(0, time_cut), break.time.by = 1,
                       tables.y.text = F,
                       xlab = "Time (yrs)",
-                      # Title gene count is dim()[2] - 4 to exclude "patient", "status", "time", and "Row_mode" columns
-                      title = paste0(tag, " (", dim(surdf_overlap)[2]-4," genes)"),
+                      title = paste0(tag, " (", length(gene_names)," genes)"),
                       palette = palette
       )
       
