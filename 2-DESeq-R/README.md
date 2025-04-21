@@ -1,8 +1,33 @@
 # RNA-seq raw-read processing, aligning, and quantifying
-## Background
-Ultimately, our DESeq analysis only makes use of RNA-seq data from two experiments: MDA-MB-231 10 weeks and MDA-MB-231 24 hours.
 
-**NOTE 1:** _The count matrices provided by this repository includes additional sample sets which were not used to produce figures. We filter these with numbered indices. Those indices require updating if you are remaking our count matrices._
+# Terminology in file names:
+### 1. DESeq2 result sets and filters
+- **AvN** = Acidosis vs. Normal (DESeq contrast)
+- **q0.1** = Filtered for a false discovery rate (padj, qval, FDR) less than 0.1
+- **ANY-FC** = Not filtered by log2FoldChange.
+- **BOTH-FC** = Significantly differentially expressed genes "Common" in both Long and Short results with same log2FoldChange direction. 
+  - `((Long DOWN) ∪ (Short DOWN)) + ((Long UP) ∪ (Short UP))`
+- **PlanA** = Intersection of 0.1 FDR gene hits found in both MDA-MB-231 10 weeks and 24 hours whose log2FoldChange act in the same direction.
+  - `BOTH-FC(q0.1(MDA 10w) ∪ q0.1(MDA 24h))`
+
+### 2. Biological pathway-associated gene sets
+Lists of genes asociated with different pathways. These genes were mostly collected from QIAGEN's IPA information.
+- **ILK** = Integrin linked kinase
+- **CC** = Cell cycle
+- **INT** = Integrin
+- **PI3K** = PI3K/AKT/mTOR pathway
+- **GLYC** = Glycolysis
+- **HIPPO** = Hippo signaling pathway
+
+### 3. The Cancer Genome Atlas (TCGA) clinical prognosis genes
+- **prog_BETTER** = Genes associated with a BETTER OS from the TCGA survival analysis
+- **prog_WORSE** = Genes associated with a WORSE OS from the TCGA survival analysis
+
+
+# Background
+Ultimately, our DESeq analysis makes use of RNA-seq data from two experiments: MDA-MB-231 10 weeks and MDA-MB-231 24 hours.
+
+**NOTE 1:** _The count matrices provided by this repository include additional sample sets which were not used to produce figures. We filter these with numbered indices in `samples_exclude` parameters. Those indices require updating if you are remaking our count matrices differently._
 
 # Pipeline summary
 
@@ -74,7 +99,7 @@ meta[paste0("combined_",i)] <- apply(meta[,combined_category], 1, paste, collaps
 }
 ```
 
-5. Generate and export the model matrix for troubleshooting / transparency of the process. Not entirely necessary, but makes for a nice visual when explaining some innerworkings and constraints of DESeq.
+5. Generate and export the model matrix for troubleshooting / transparency of the process. Not critical to obtaining results, but generates an informative visual when explaining the innerworkings of DESeq and design constraints.
 ```R
 # Export model matrix
 mm <-model.matrix(design, meta)
@@ -99,7 +124,7 @@ vsd_ddstrim <- assay(vst(ddstrim))
 pca_data <- pca(vsd_ddstrim, metadata = meta, removeVar = 0.1)
 ```
 
-8. p value histogram before and after demonstrates efficacy of removing low count entries in step 6. To do this, it generates results for one contrast (specified as `test_contrast`).
+8. p value histogram before and after demonstrates efficacy of filtering out statistically insignificant genes by removing low count entries in step 6. To make these p values, it generates two results for one contrast (provided by `test_contrast`).
 
 ## Calling results and significance
 Here we create two lists that contain results called from the above DDS. `res` contains all results while `sig_res` contains a copy of `res` entries filtered for a false discovery rate of `cutoff_FDR` (for this analysis, `cutoff_FDR = 0.1`).
@@ -164,14 +189,14 @@ create_compare_plot(set1 = res$mda24h10w_24hAvN,
 ```
 
 ## Selective Heatmaps
-This block creates heat maps of genes based on their l2fc values. In this case, we generate heat maps for (l2fc UP) intersecting (HIPPO pathway genes) intersecting (prognosis BETTER) and a companion plot for DOWN, ILKmany, and WORSE. Here, "ILKmany" refers to a combination of the pathway lists `c(LA_ILK,LA_cc,LA_int,LA_PI3K,LA_glyc)`. Most of the code in `get_hm()` is for manipulating ranges and color paletes for making the plot. The key parts to note here are:
+This block creates heat maps of genes based on their l2fc values. In this case, we generate heat maps for ((l2fc UP) intersecting (HIPPO pathway genes) intersecting (prognosis BETTER)) and a companion plot for DOWN, ILKmany, and WORSE. Here, "ILKmany" refers to a combination of the pathway lists `c(LA_ILK,LA_cc,LA_int,LA_PI3K,LA_glyc)`. The genes present in these groups can be found in `2-DESeq-R/path_groups/`. Most of the code in `get_hm()` is for manipulating ranges and color paletes for making the plot. The key parts to note here are:
 1. We accept prognosis genes which can be optionally associated with a set of genes.
 2. We can generate a plot with a limited number of entries (`TOP_GENES`, `TOP_GENES_HIGH`, and `TOP_GENES_LOW`).
-3. We can "fix" rows to the plot to force them to display despite limits.
-4. Both a TOP set and ALL set of genes are generated as a heat map and a set of genes required to make the specific plot (`heatmap_hits...csv` and `heatmapEXTENDED...csv` reflect TOP and ALL respectively).
-5. We feed results to `get_hm()` with or without filtering for prognosis genes.
+3. We can "fix" gene naems to the plot and force them to display (in ADDITION to gene count limits) via the `FIXED_ROWS` vector.
+4. Both "TOP" and "ALL" sets of genes are generated as a heat map and exported set of genes (`heatmap_hits...csv` and `heatmapEXTENDED...csv` reflect "TOP" and "ALL" respectively).
+5. We pass results to `get_hm()` with or without filtering for prognosis genes via `prog = NA, UP, or DOWN`.
 6. The `get_hm()` function further calls `plot_heatmap()` defined in `2-DESeq-R/modules/heatmaps.R`.
-    - Much like `get_hm()`, most of `plot_heatmap()`'s code is dedicated to preparing it for displaying via the `pheatmap()` function from the [Pretty Heatmaps R package](https://cran.r-project.org/web/packages/pheatmap/pheatmap.pdf).
+    - Much like `get_hm()`, most of `plot_heatmap()`'s code is dedicated to preparing a gene list for displaying via the `pheatmap()` function from the [Pretty Heatmaps R package](https://cran.r-project.org/web/packages/pheatmap/pheatmap.pdf).
 ```R
 fullsource <- planA$intersect
 tag <- "24h-U-10w"
@@ -197,20 +222,3 @@ Here we visualize the results of [QIAGEN's Ingenuity Pathway Analysis](https://d
   toppathwaysIPA(input = "GO/IPA_PATHWAYS_STAR_MDA24h_vs10W.csv", tag = "((MDA 24h) U (MDA 10w)) BOTH Common TOP20plus", limit = 26, exclude_from_top_by_index = c(21:26,28:32,34:44,46,48),height=6)
   toppathwaysIPA(input = "GO/IPA_PATHWAYS_STAR_MDA24h_vs10W.csv", tag = "((MDA 24h) U (MDA 10w)) BOTH Common TOP10plus", limit = 17, exclude_from_top_by_index = c(11:13,15:26,28:32,34:44,46,48),height=6)
 ```
-
-# Terminology in file names:
-- AvN = Acidosis vs. Normal (DESeq contrast)
-- q0.1 = Filtered for a false discovery rate (padj, qval, FDR) less than 0.1
-- ANY-FC = Not filtered by log2FoldChange.
-- BOTH-FC = Significantly differentially expressed genes "Common" in both Long and Short results with same log2FoldChange direction. `((Long DOWN) ∪ (Short DOWN)) + ((Long UP) ∪ (Short UP))`
-
-- ILK = Integrin linked kinase (gene pathways aggregated from multiple sources)
-- CC = Cell cycle (")
-- INT = Integrin (")
-- PI3K = PI3K/AKT/mTOR pathway (")
-- GLYC = Glycolysis (")
-- HIPPO = Hippo signaling pathway (")
-_Lists of genes assigned to these pathways can be provided upon request, and will be present in source code_
-
-- prog_BETTER = Genes associated with a BETTER OS from the TCGA survival analysis
-- prog_WORSE = Genes associated with a WORSE OS from the TCGA survival analysis

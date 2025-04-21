@@ -25,6 +25,8 @@ rm(list=ls())
 }
 
 # Acquiring TCGA datasets
+# This can take a long time (on the order of tens of minutes to hours depending on internet speed)
+# If you have run this already, skip the block and import "survivalanalysis/tcga_brca_data_2.15.RDS"
 {
   # prep data from TCGA
   query <- GDCquery(
@@ -130,8 +132,8 @@ rm(list=ls())
       }
       rm(gene, tpms, df, cut, data.cut, fit, df2s)
     }
-    write.table(survival_genes_better,"survivalanalysis/Prognostic_better_outcome_genes_0.05q_1.2HR.csv", sep=",", col.names = F, row.names = F, quote = F)
-    write.table(survival_genes_worse,"survivalanalysis/Prognostic_worse_outcome_genes_0.05q_1.2HR.csv", sep=",", col.names = F, row.names = F, quote = F)
+    write.table(survival_genes_better,"survivalanalysis/Prognostic_better_outcome_genes_0.05p_1.2HR.csv", sep=",", col.names = F, row.names = F, quote = F)
+    write.table(survival_genes_worse,"survivalanalysis/Prognostic_worse_outcome_genes_0.05p_1.2HR.csv", sep=",", col.names = F, row.names = F, quote = F)
   }
   
   # Shared function to create all survival plots and associated data

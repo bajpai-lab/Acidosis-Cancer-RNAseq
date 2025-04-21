@@ -2,22 +2,21 @@
 ## Background
 This section is broken into sequential steps similar to the root of this repository. Under each step, we include a `commands` file which stores the lines run. Each step was completed by running `bash commands` within the root of a step's directory (e.g. `cd ./2-trim; bash commands`).
 
-**NOTE 1:** _We are excluding files which are in excess of 10MB in an effort to keep this repository light enough for Github. Raw sequence files are available under the usual channels (see paper)._
+**NOTE 1:** _This repository excludes files which are in excess of 10MB in an effort to keep this work light enough for Github. Raw sequence files are available under the usual channels (see paper)._
 
 **NOTE 2:** _Most scripts in this section feature [absolute paths](https://www.redhat.com/en/blog/linux-path-absolute-relative) to programs or files. Please make note of these paths and **update them according to your particular environment**._
 
-**NOTE 3:** _We use job counts which may not match your system's capabilities. Please check our scripts' `-j`, `-t`, and other multithreading parameters BEFORE running them!_
+**NOTE 3:** _We use **job counts which may not match your system's capabilities**. Please check our scripts' `-j`, `-t`, and other multithreading parameters BEFORE running them!_
 
 # Pipeline summary
 ## Peculiarities
 
-Everyone seems to have a special way of managing their bioinformatics pipelines. These are two main design choices we made for ours:
+Since in-house bioinformatics pipelines tend to have unusual variances in approach between labs, we will note some of ours. These are two potentially surprising design choices we made for ours:
 - The use of [GNU parallel](https://en.wikipedia.org/wiki/GNU_parallel) to parallelize jobs and manage system load
-    - This is a nice way to parallelize the jobs, but may result in surprising syntax where we must manipulate file strings prior to running the "meat" of a step.
+    - This is an easy way to parallelize jobs within one system, but can result in surprising syntax where we must manipulate file strings prior to running a "main" program.
 - The use of absolute paths to [Miniforge (Conda)](https://github.com/conda-forge/miniforge) environments' scripts.
     - This is a workaround to allow `parallel` to access scripts without the long delay of activating a conda environment within a job.
-
-In the future, we may start using standardized pipeline frameworks like [snakemake](https://snakemake.github.io/), but you are not so fortunate today.
+    - This approach can result in complications with nested dependencies. In this work, instances of this complication are resolved by the `--path_to_cutadapt` parameter in Trim Galore.
 
 ## 2-trim
 Here, we use [Trim Galore](https://github.com/FelixKrueger/TrimGalore) to trim our fastq data by a quality cutoff of `30` and against adapter sequences `CTGTCTCTTATACACATCT` and `AGATGTGTATAAGAGACAG`.
@@ -37,7 +36,7 @@ find ../0-fastq/*.fastq.gz | sed -r 's/^(.*_S[0-9]).*$/\1/g' | sort -u | paralle
 ## 3-align
 We align our trimmed reads from `../2-trim/*.gz` (created the step prior) using [STAR](https://github.com/alexdobin/STAR) against the [Human - Release 47 GRCh38.p14](https://www.gencodegenes.org/human/) genome. Once again, we make some string manipulations with `sed` to prepare our fastq files for paired or unpaired alignment.
 
-Our datasets were a mix of paired and unpaired sequence files, so we wrote slightly different alignments for each. Unpaired was run without the presence of paired-end reads in `2-trim`, and may require more creative separating to now run together.
+Our datasets were a mix of paired and unpaired sequence files, so we wrote slightly different alignments for each. When the unpaired reads were processed, it was without the presence of paired-end reads in `2-trim`. This may require more creative separating to now run together.
 
 ```bash
 # Content of /1-RNAseq-STAR/2-trim/commands
