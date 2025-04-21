@@ -131,7 +131,9 @@ library(readr)
                       name1 = "(pHe 6.4 / 7.4) MDA-MB-231 24 h",
                       name2 = "(pHe 6.4 / 7.4) MDA-MB-231 10 w",
                       padj_cutoff = cutoff_FDR,
-                      out_path = "results/l2fc_planA_MDA24h10w.pdf")
+                      out_path = "results/l2fc_planA_MDA24h10w.pdf",
+                      subset_up = prog_BETTER$gene_name,
+                      subset_down = prog_WORSE$gene_name)
 }
 
 #### Selective Heatmaps
