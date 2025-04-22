@@ -34,10 +34,31 @@ library(readr)
                                       combined_categories = list(
                                         c("duration","condition")
                                       ),
-                                   design = ~ combined_1,
-                                   samples_exclude = c(7:12,21:44), # MDA 23d, Corbet 6w, and SUM-159
-                                   test_name = "test_mda_24h",
-                                   test_contrast = c("combined_1", "24h_acidosis", "24h_normal"))
+                                      design = ~ combined_1,
+                                      samples_exclude = c(7:12,21:44), # MDA 23d, Corbet 6w, and SUM-159
+                                      test_name = "test_mda_24h",
+                                      test_contrast = c("combined_1", "24h_acidosis", "24h_normal"))
+  }
+  
+  # Corbet
+  {
+    dds_corbet_samples <- get_dds(group_name = "corbet_samples",
+                                         design = ~ cell_type + condition,
+                                         samples_exclude = c(1:20,39:44), # MDA 23d, MDA 10w, MDA 24h, and SUM-159
+                                         test_name = "test_corbet",
+                                         test_contrast = c("condition", "acidosis", "normal"))
+  }
+  
+  # Corbet triple
+  {
+    dds_corbet_triple_samples <- get_dds(group_name = "corbet_triple_samples",
+                                         combined_categories = list(
+                                           c("cell_type","condition")
+                                         ),
+                                         design = ~ combined_1,
+                                         samples_exclude = c(1:20,39:44), # MDA 23d, MDA 10w, MDA 24h, and SUM-159
+                                         test_name = "test_SiHa",
+                                         test_contrast = c("combined_1", "SiHa_acidosis", "SiHa_normal"))
   }
 }
 
@@ -53,7 +74,15 @@ library(readr)
     res <- list(
       # dds_mda_24h10w_samples: ~ (duration)_(condition)
       mda24h10w_24hAvN = get_results(dds = dds_mda_24h10w_samples, contrast = c("combined_1", "24h_acidosis", "24h_normal"), group_name = "mda_24h10w_samples", results_name = "mda24h10w_24h_AvN"),
-      mda24h10w_10wAvN = get_results(dds = dds_mda_24h10w_samples, contrast = c("combined_1", "10w_acidosis", "10w_normal"), group_name = "mda_24h10w_samples", results_name = "mda24h10w_10w_AvN")
+      mda24h10w_10wAvN = get_results(dds = dds_mda_24h10w_samples, contrast = c("combined_1", "10w_acidosis", "10w_normal"), group_name = "mda_24h10w_samples", results_name = "mda24h10w_10w_AvN"),
+      
+      # dds_corbet_samples: ~ cell_type + condition
+      corbet_AvN = get_results(dds = dds_corbet_samples, contrast = c("condition", "acidosis", "normal"), group_name = "corbet_samples", results_name = "corbet_AvN"),
+      
+      # dds_corbet_triple_samples: ~ cell_type + condition
+      FaDu_AvN = get_results(dds = dds_corbet_triple_samples, contrast = c("combined_1", "FaDu_acidosis", "FaDu_normal"), group_name = "corbet_triple_samples", results_name = "FaDu_AvN"),
+      HCT116_AvN = get_results(dds = dds_corbet_triple_samples, contrast = c("combined_1", "HCT116_acidosis", "HCT116_normal"), group_name = "corbet_triple_samples", results_name = "HCT116_AvN"),
+      SiHa_AvN = get_results(dds = dds_corbet_triple_samples, contrast = c("combined_1", "SiHa_acidosis", "SiHa_normal"), group_name = "corbet_triple_samples", results_name = "SiHa_AvN")
     )
     
     # Building FDR-cutoff-filters of results
@@ -78,6 +107,14 @@ library(readr)
   # Loading results from new TCGA analysis
   prog_BETTER = read.csv('../3-TCGA-R/PlanA/gene-list_planA_BOTHfcUP_progBETTER.csv')
   prog_WORSE = read.csv('../3-TCGA-R/PlanA/gene-list_planA_BOTHfcDOWN_progWORSE.csv')
+  
+  # Loading Corbet Triple TCGA analysis
+  progCorbetTriple_BETTER = read.csv('../3-TCGA-R/CorbetTriple/gene-list_CorbetTriple_BOTHfcUP_progBETTER.csv')
+  progCorbetTriple_WORSE = read.csv('../3-TCGA-R/CorbetTriple/gene-list_CorbetTriple_BOTHfcDOWN_progWORSE.csv')
+  
+  # Loading Corbet TCGA analysis
+  progCorbet_BETTER = read.csv('../3-TCGA-R/Corbet/gene-list_Corbet_BOTHfcUP_progBETTER.csv')
+  progCorbet_WORSE = read.csv('../3-TCGA-R/Corbet/gene-list_Corbet_BOTHfcDOWN_progWORSE.csv')
 }
 
 ##### Generating intersects
@@ -95,8 +132,17 @@ library(readr)
         MDA24h10w_10w=res$mda24h10w_10wAvN
       ))
       write.csv(planA$sig_BOTH, file = "results/intersect_PlanA_(10w)U(24h)_BOTH-FC-by-acidosis_0.1FDR.csv")
-      write.csv(planA$sig, file = "results/intersect_PlanA_(10w)U(24h)_ANY-FC-by-acidosis_0.1FDR.csv")
     }
+  }
+  
+  # Corbet Triple
+  {
+    corbet_triple <- directional_intersect(list(
+      FaDu = res$FaDu_AvN,
+      HCT116 = res$HCT116_AvN,
+      SiHa = res$SiHa_AvN
+    ))
+    write.csv(corbet_triple$sig_BOTH, file = "results/intersect_corbet_triple_BOTH-FC-by-acidosis_0.1FDR.csv")
   }
 }
 
@@ -116,6 +162,26 @@ library(readr)
     )
     euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Plan A - Overlap of genes altered by acidosis (FDR < 0.1)")
     ggsave(euler_plot, filename="results/euler_diagram_planA.pdf", width=6, height=5)
+  }
+  
+  # Different Prognosis-RNAseq matches
+  {
+    euler_plot <- create_eulerr(
+      prog_BETTER$gene_name, "Better OS (PlanA)",
+      progCorbet_BETTER$gene_name, "Better OS (Corbet)",
+      progCorbetTriple_BETTER$gene_name, "Better OS (CorbetTriple)"
+    )
+    euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Better OS - Overlap of genes found in better OS from TCGA")
+    ggsave(euler_plot, filename="results/euler_diagram_betterOS.pdf", width=6, height=5)
+  }
+  {
+    euler_plot <- create_eulerr(
+      prog_WORSE$gene_name, "Worse OS (PlanA)",
+      progCorbet_WORSE$gene_name, "Worse OS (Corbet)",
+      progCorbetTriple_WORSE$gene_name, "Worse OS (CorbetTriple)"
+    )
+    euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Worse OS - Overlap of genes found in worse OS from TCGA")
+    ggsave(euler_plot, filename="results/euler_diagram_worseOS.pdf", width=6, height=5)
   }
 }
 

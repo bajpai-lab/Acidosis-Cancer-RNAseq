@@ -255,6 +255,7 @@ rm(list=ls())
     }
   }
   
+  
   # Creating Kaplan-Meier curves for our DESeq analysis hits (filtering using prognosis genes)
   {
     genes <- read_csv("../2-DESeq-R/results/intersect_PlanA_(10w)U(24h)_BOTH-FC-by-acidosis_0.1FDR.csv")
@@ -266,7 +267,6 @@ rm(list=ls())
                           genes$log2FoldChange.MDA24h10w_10w > 0,]
       genes_up_TCGAbetter <- genes_up[genes_up$gene_name %in% survival_genes_better,]
       genes_up_TCGAp0.1 <- genes_up[genes_up$gene_name %in% colnames(survivaldf),]
-      write_csv(x = genes_up_TCGAp0.1, file = "UP_TCGAp0.1.csv")
       
       # Running genes
       plot_survival_curve(genes=genes_up, out_path=out_path, tag="planA_BOTHfcUP_NOprog", palette = c("#44546a","#1cbdc3"))
@@ -281,13 +281,81 @@ rm(list=ls())
                             genes$log2FoldChange.MDA24h10w_10w < 0,]
       genes_down_TCGAworse <- genes_down[genes_down$gene_name %in% survival_genes_worse,]
       genes_down_TCGAp0.1 <- genes_down[genes_down$gene_name %in% colnames(survivaldf),]
-      write_csv(x = genes_down_TCGAp0.1, file = "DOWN_TCGAp0.1.csv")
       
       # Running genes
       plot_survival_curve(genes=genes_down, out_path=out_path, tag="planA_BOTHfcDOWN_NOprog", palette = c("#f3766e", "#4472c4"))
       
       # Running w/ prog filter
       plot_survival_curve(genes=genes_down_TCGAworse, out_path=out_path, tag="planA_BOTHfcDOWN_progWORSE", palette = c("#f3766e", "#4472c4"))
+    }
+  }
+  
+  
+  
+  # Creating Kaplan-Meier curves for Corbet Triple
+  {
+    genes <- read_csv("../2-DESeq-R/results/intersect_corbet_triple_BOTH-FC-by-acidosis_0.1FDR.csv")
+    out_path = "CorbetTriple/"
+    
+    # Activated by acidosis
+    {
+      genes_up <- genes[genes$log2FoldChange.FaDu > 0 &
+                          genes$log2FoldChange.HCT116 > 0 &
+                          genes$log2FoldChange.SiHa > 0,]
+      genes_up_TCGAbetter <- genes_up[genes_up$gene_name %in% survival_genes_better,]
+      
+      # Running genes
+      plot_survival_curve(genes=genes_up, out_path=out_path, tag="CorbetTriple_BOTHfcUP_NOprog", palette = c("#44546a","#1cbdc3"))
+      
+      # Running w/ prog filter
+      plot_survival_curve(genes=genes_up_TCGAbetter, out_path=out_path, tag="CorbetTriple_BOTHfcUP_progBETTER", palette = c("#44546a","#1cbdc3"))
+    }
+    
+    # Repressed by acidosis
+    {
+      genes_down <-genes[genes$log2FoldChange.FaDu < 0 &
+                           genes$log2FoldChange.HCT116 < 0 &
+                           genes$log2FoldChange.SiHa < 0,]
+      genes_down_TCGAworse <- genes_down[genes_down$gene_name %in% survival_genes_worse,]
+      
+      # Running genes
+      plot_survival_curve(genes=genes_down, out_path=out_path, tag="CorbetTriple_BOTHfcDOWN_NOprog", palette = c("#f3766e", "#4472c4"))
+      
+      # Running w/ prog filter
+      plot_survival_curve(genes=genes_down_TCGAworse, out_path=out_path, tag="CorbetTriple_BOTHfcDOWN_progWORSE", palette = c("#f3766e", "#4472c4"))
+    }
+  }
+  
+  
+  
+  
+  # Creating Kaplan-Meier curves for Corbet
+  {
+    genes <- read_csv("../2-DESeq-R/results/corbet_samples/Acidosis-vs-control_q0.1_anyFC_corbet_AvN.csv")
+    out_path = "Corbet/"
+    
+    # Activated by acidosis
+    {
+      genes_up <- genes[genes$log2FoldChange > 0,]
+      genes_up_TCGAbetter <- genes_up[genes_up$gene_name %in% survival_genes_better,]
+      
+      # Running genes
+      plot_survival_curve(genes=genes_up, out_path=out_path, tag="Corbet_BOTHfcUP_NOprog", palette = c("#44546a","#1cbdc3"))
+      
+      # Running w/ prog filter
+      plot_survival_curve(genes=genes_up_TCGAbetter, out_path=out_path, tag="Corbet_BOTHfcUP_progBETTER", palette = c("#44546a","#1cbdc3"))
+    }
+    
+    # Repressed by acidosis
+    {
+      genes_down <-genes[genes$log2FoldChange < 0,]
+      genes_down_TCGAworse <- genes_down[genes_down$gene_name %in% survival_genes_worse,]
+      
+      # Running genes
+      plot_survival_curve(genes=genes_down, out_path=out_path, tag="Corbet_BOTHfcDOWN_NOprog", palette = c("#f3766e", "#4472c4"))
+      
+      # Running w/ prog filter
+      plot_survival_curve(genes=genes_down_TCGAworse, out_path=out_path, tag="Corbet_BOTHfcDOWN_progWORSE", palette = c("#f3766e", "#4472c4"))
     }
   }
 }
