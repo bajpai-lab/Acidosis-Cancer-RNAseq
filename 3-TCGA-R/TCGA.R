@@ -266,6 +266,7 @@ rm(list=ls())
       genes_up <- genes[genes$log2FoldChange.MDA24h10w_24h > 0 &
                           genes$log2FoldChange.MDA24h10w_10w > 0,]
       genes_up_TCGAbetter <- genes_up[genes_up$gene_name %in% survival_genes_better,]
+      genes_up_TCGAworse <- genes_up[genes_up$gene_name %in% survival_genes_worse,]
       genes_up_TCGAp0.1 <- genes_up[genes_up$gene_name %in% colnames(survivaldf),]
       
       # Running genes
@@ -273,6 +274,7 @@ rm(list=ls())
       
       # Running w/ prog filter
       plot_survival_curve(genes=genes_up_TCGAbetter, out_path=out_path, tag="planA_BOTHfcUP_progBETTER", palette = c("#44546a","#1cbdc3"))
+      plot_survival_curve(genes=genes_up_TCGAworse, out_path=out_path, tag="planA_BOTHfcUP_progWORSE", palette = c("#44546a","#1cbdc3"))
     }
     
     # Repressed by acidosis
@@ -280,6 +282,7 @@ rm(list=ls())
       genes_down <- genes[genes$log2FoldChange.MDA24h10w_24h < 0 &
                             genes$log2FoldChange.MDA24h10w_10w < 0,]
       genes_down_TCGAworse <- genes_down[genes_down$gene_name %in% survival_genes_worse,]
+      genes_down_TCGAbetter <- genes_down[genes_down$gene_name %in% survival_genes_better,]
       genes_down_TCGAp0.1 <- genes_down[genes_down$gene_name %in% colnames(survivaldf),]
       
       # Running genes
@@ -287,6 +290,7 @@ rm(list=ls())
       
       # Running w/ prog filter
       plot_survival_curve(genes=genes_down_TCGAworse, out_path=out_path, tag="planA_BOTHfcDOWN_progWORSE", palette = c("#f3766e", "#4472c4"))
+      plot_survival_curve(genes=genes_down_TCGAbetter, out_path=out_path, tag="planA_BOTHfcDOWN_progBETTER", palette = c("#f3766e", "#4472c4"))
     }
   }
   
@@ -303,6 +307,7 @@ rm(list=ls())
                           genes$log2FoldChange.HCT116 > 0 &
                           genes$log2FoldChange.SiHa > 0,]
       genes_up_TCGAbetter <- genes_up[genes_up$gene_name %in% survival_genes_better,]
+      genes_up_TCGAworse <- genes_up[genes_up$gene_name %in% survival_genes_worse,]
       
       # Running genes
       plot_survival_curve(genes=genes_up, out_path=out_path, tag="CorbetTriple_BOTHfcUP_NOprog", palette = c("#44546a","#1cbdc3"))
