@@ -19,6 +19,8 @@ library(readr)
 {
   # FDR cutoff for significant results
   cutoff_FDR=0.1
+  
+  yap_genes <- read.csv("YAP_genes.txt",header = F)[,1]
 }
 
 ##### DDS creation
@@ -105,16 +107,16 @@ library(readr)
 ##### Matching to prog genes
 {
   # Loading results from new TCGA analysis
-  prog_BETTER = read.csv('../3-TCGA-R/PlanA/gene-list_planA_BOTHfcUP_progBETTER.csv')
-  prog_WORSE = read.csv('../3-TCGA-R/PlanA/gene-list_planA_BOTHfcDOWN_progWORSE.csv')
+  prog_BETTER = read.csv('../3-TCGA-R/BRCA/PlanA/gene-list_planA_BOTHfcUP_progBETTER.csv')
+  prog_WORSE = read.csv('../3-TCGA-R/BRCA/PlanA/gene-list_planA_BOTHfcDOWN_progWORSE.csv')
   
   # Loading Corbet Triple TCGA analysis
-  progCorbetTriple_BETTER = read.csv('../3-TCGA-R/CorbetTriple/gene-list_CorbetTriple_BOTHfcUP_progBETTER.csv')
-  progCorbetTriple_WORSE = read.csv('../3-TCGA-R/CorbetTriple/gene-list_CorbetTriple_BOTHfcDOWN_progWORSE.csv')
+  progCorbetTriple_BETTER = read.csv('../3-TCGA-R/BRCA/CorbetTriple/gene-list_CorbetTriple_BOTHfcUP_progBETTER.csv')
+  progCorbetTriple_WORSE = read.csv('../3-TCGA-R/BRCA/CorbetTriple/gene-list_CorbetTriple_BOTHfcDOWN_progWORSE.csv')
   
   # Loading Corbet TCGA analysis
-  progCorbet_BETTER = read.csv('../3-TCGA-R/Corbet/gene-list_Corbet_BOTHfcUP_progBETTER.csv')
-  progCorbet_WORSE = read.csv('../3-TCGA-R/Corbet/gene-list_Corbet_BOTHfcDOWN_progWORSE.csv')
+  progCorbet_BETTER = read.csv('../3-TCGA-R/BRCA/Corbet/gene-list_Corbet_BOTHfcUP_progBETTER.csv')
+  progCorbet_WORSE = read.csv('../3-TCGA-R/BRCA/Corbet/gene-list_Corbet_BOTHfcDOWN_progWORSE.csv')
 }
 
 ##### Generating intersects
@@ -135,6 +137,15 @@ library(readr)
     }
   }
   
+  # YAP gene intersects
+  {
+    planA_YAP <- directional_intersect(list(
+      MDA24h10w_24h=res$mda24h10w_24hAvN[res$mda24h10w_24hAvN$gene_name %in% yap_genes,],
+      MDA24h10w_10w=res$mda24h10w_10wAvN[res$mda24h10w_10wAvN$gene_name %in% yap_genes,]
+    ))
+    write.csv(planA_YAP$sig_BOTH, file = "results/intersect_YAP-only_10w_24h_BOTH-FC-by-acidosis_0.1FDR.csv")
+  }
+  
   # Corbet Triple
   {
     corbet_triple <- directional_intersect(list(
@@ -153,7 +164,7 @@ library(readr)
 {
   source ('modules/euler_diagram.R')
   
-  # Plan A SUM MDA
+  # Plan A MDA 24h 10w
   {
     euler_plot <- create_eulerr(
       sig_res$mda24h10w_24hAvN$gene_name, "Short (MDA 24h)",
@@ -162,6 +173,17 @@ library(readr)
     )
     euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Plan A - Overlap of genes altered by acidosis (FDR < 0.1)")
     ggsave(euler_plot, filename="results/euler_diagram_planA.pdf", width=6, height=5)
+  }
+  
+  # (YAP only) Plan A MDA 24h 10w
+  {
+    euler_plot <- create_eulerr(
+      sig_res$mda24h10w_24hAvN$gene_name[sig_res$mda24h10w_24hAvN$gene_name %in% yap_genes], "Short (MDA 24h) (YAP)",
+      sig_res$mda24h10w_10wAvN$gene_name[sig_res$mda24h10w_10wAvN$gene_name %in% yap_genes], "Long (MDA 10w) (YAP)",
+      planA_YAP$sig_BOTH$gene_name, "Common BOTH (YAP)"
+    )
+    euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Plan A - Overlap of YAP-associated genes altered by acidosis (FDR < 0.1)")
+    ggsave(euler_plot, filename="results/euler_diagram_planA_YAP.pdf", width=6, height=5)
   }
   
   # Different Prognosis-RNAseq matches
@@ -200,6 +222,36 @@ library(readr)
                       out_path = "results/l2fc_planA_MDA24h10w.pdf",
                       subset_up = prog_BETTER$gene_name,
                       subset_down = prog_WORSE$gene_name)
+  
+  create_compare_plot(set1 = res$mda24h10w_24hAvN[res$mda24h10w_24hAvN$gene_name %in% yap_genes,],
+                      set2 = res$mda24h10w_10wAvN[res$mda24h10w_10wAvN$gene_name %in% yap_genes,],
+                      name1 = "(pHe 6.4 / 7.4) MDA-MB-231 24 h (YAP)",
+                      name2 = "(pHe 6.4 / 7.4) MDA-MB-231 10 w (YAP)",
+                      padj_cutoff = cutoff_FDR,
+                      out_path = "results/l2fc_planA_YAP-only_MDA24h10w.pdf")
+  
+  
+  # Generate and export statistics for (YAP y/n) x (L2FC down/up)
+  {
+    sink()
+    sink(paste0("results/l2fcDU_YAPyn_PlanAboth_stats_report.txt"))
+    
+    # Fisher test
+    {
+      fishertest <- with(planA$sig_BOTH,
+                         fisher.test(table(
+                           gene_name %in% yap_genes,
+                           log2FoldChange.MDA24h10w_24h<0)))
+      
+      fisher_report <- paste0(
+        "########## FISHER TEST\n########## FISHER TEST\n\n",fishertest$method,"\n",
+        "  odds ratio: ",format(fishertest$estimate, digits=4, scientific=FALSE),"\n",
+        "  reported P value: ",format(fishertest$p.value, digits=4, scientific=TRUE))
+      
+      cat(fisher_report)
+    }
+    sink()
+  }
 }
 
 #### Selective Heatmaps
