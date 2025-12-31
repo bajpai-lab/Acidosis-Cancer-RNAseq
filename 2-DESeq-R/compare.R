@@ -37,30 +37,8 @@ library(readr)
                                         c("duration","condition")
                                       ),
                                       design = ~ combined_1,
-                                      samples_exclude = c(7:12,21:44), # MDA 23d, Corbet 6w, and SUM-159
                                       test_name = "test_mda_24h",
                                       test_contrast = c("combined_1", "24h_acidosis", "24h_normal"))
-  }
-  
-  # Corbet
-  {
-    dds_corbet_samples <- get_dds(group_name = "corbet_samples",
-                                         design = ~ cell_type + condition,
-                                         samples_exclude = c(1:20,39:44), # MDA 23d, MDA 10w, MDA 24h, and SUM-159
-                                         test_name = "test_corbet",
-                                         test_contrast = c("condition", "acidosis", "normal"))
-  }
-  
-  # Corbet triple
-  {
-    dds_corbet_triple_samples <- get_dds(group_name = "corbet_triple_samples",
-                                         combined_categories = list(
-                                           c("cell_type","condition")
-                                         ),
-                                         design = ~ combined_1,
-                                         samples_exclude = c(1:20,39:44), # MDA 23d, MDA 10w, MDA 24h, and SUM-159
-                                         test_name = "test_SiHa",
-                                         test_contrast = c("combined_1", "SiHa_acidosis", "SiHa_normal"))
   }
 }
 
@@ -76,15 +54,7 @@ library(readr)
     res <- list(
       # dds_mda_24h10w_samples: ~ (duration)_(condition)
       mda24h10w_24hAvN = get_results(dds = dds_mda_24h10w_samples, contrast = c("combined_1", "24h_acidosis", "24h_normal"), group_name = "mda_24h10w_samples", results_name = "mda24h10w_24h_AvN"),
-      mda24h10w_10wAvN = get_results(dds = dds_mda_24h10w_samples, contrast = c("combined_1", "10w_acidosis", "10w_normal"), group_name = "mda_24h10w_samples", results_name = "mda24h10w_10w_AvN"),
-      
-      # dds_corbet_samples: ~ cell_type + condition
-      corbet_AvN = get_results(dds = dds_corbet_samples, contrast = c("condition", "acidosis", "normal"), group_name = "corbet_samples", results_name = "corbet_AvN"),
-      
-      # dds_corbet_triple_samples: ~ cell_type + condition
-      FaDu_AvN = get_results(dds = dds_corbet_triple_samples, contrast = c("combined_1", "FaDu_acidosis", "FaDu_normal"), group_name = "corbet_triple_samples", results_name = "FaDu_AvN"),
-      HCT116_AvN = get_results(dds = dds_corbet_triple_samples, contrast = c("combined_1", "HCT116_acidosis", "HCT116_normal"), group_name = "corbet_triple_samples", results_name = "HCT116_AvN"),
-      SiHa_AvN = get_results(dds = dds_corbet_triple_samples, contrast = c("combined_1", "SiHa_acidosis", "SiHa_normal"), group_name = "corbet_triple_samples", results_name = "SiHa_AvN")
+      mda24h10w_10wAvN = get_results(dds = dds_mda_24h10w_samples, contrast = c("combined_1", "10w_acidosis", "10w_normal"), group_name = "mda_24h10w_samples", results_name = "mda24h10w_10w_AvN")
     )
     
     # Building FDR-cutoff-filters of results
@@ -109,14 +79,6 @@ library(readr)
   # Loading results from new TCGA analysis
   prog_BETTER = read.csv('../3-TCGA-R/BRCA/PlanA/gene-list_planA_BOTHfcUP_progBETTER.csv')
   prog_WORSE = read.csv('../3-TCGA-R/BRCA/PlanA/gene-list_planA_BOTHfcDOWN_progWORSE.csv')
-  
-  # Loading Corbet Triple TCGA analysis
-  progCorbetTriple_BETTER = read.csv('../3-TCGA-R/BRCA/CorbetTriple/gene-list_CorbetTriple_BOTHfcUP_progBETTER.csv')
-  progCorbetTriple_WORSE = read.csv('../3-TCGA-R/BRCA/CorbetTriple/gene-list_CorbetTriple_BOTHfcDOWN_progWORSE.csv')
-  
-  # Loading Corbet TCGA analysis
-  progCorbet_BETTER = read.csv('../3-TCGA-R/BRCA/Corbet/gene-list_Corbet_BOTHfcUP_progBETTER.csv')
-  progCorbet_WORSE = read.csv('../3-TCGA-R/BRCA/Corbet/gene-list_Corbet_BOTHfcDOWN_progWORSE.csv')
 }
 
 ##### Generating intersects
@@ -135,25 +97,6 @@ library(readr)
       ))
       write.csv(planA$sig_BOTH, file = "results/intersect_PlanA_(10w)U(24h)_BOTH-FC-by-acidosis_0.1FDR.csv")
     }
-  }
-  
-  # YAP gene intersects
-  {
-    planA_YAP <- directional_intersect(list(
-      MDA24h10w_24h=res$mda24h10w_24hAvN[res$mda24h10w_24hAvN$gene_name %in% yap_genes,],
-      MDA24h10w_10w=res$mda24h10w_10wAvN[res$mda24h10w_10wAvN$gene_name %in% yap_genes,]
-    ))
-    write.csv(planA_YAP$sig_BOTH, file = "results/intersect_YAP-only_10w_24h_BOTH-FC-by-acidosis_0.1FDR.csv")
-  }
-  
-  # Corbet Triple
-  {
-    corbet_triple <- directional_intersect(list(
-      FaDu = res$FaDu_AvN,
-      HCT116 = res$HCT116_AvN,
-      SiHa = res$SiHa_AvN
-    ))
-    write.csv(corbet_triple$sig_BOTH, file = "results/intersect_corbet_triple_BOTH-FC-by-acidosis_0.1FDR.csv")
   }
 }
 
@@ -174,37 +117,6 @@ library(readr)
     euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Plan A - Overlap of genes altered by acidosis (FDR < 0.1)")
     ggsave(euler_plot, filename="results/euler_diagram_planA.pdf", width=6, height=5)
   }
-  
-  # (YAP only) Plan A MDA 24h 10w
-  {
-    euler_plot <- create_eulerr(
-      sig_res$mda24h10w_24hAvN$gene_name[sig_res$mda24h10w_24hAvN$gene_name %in% yap_genes], "Short (MDA 24h) (YAP)",
-      sig_res$mda24h10w_10wAvN$gene_name[sig_res$mda24h10w_10wAvN$gene_name %in% yap_genes], "Long (MDA 10w) (YAP)",
-      planA_YAP$sig_BOTH$gene_name, "Common BOTH (YAP)"
-    )
-    euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Plan A - Overlap of YAP-associated genes altered by acidosis (FDR < 0.1)")
-    ggsave(euler_plot, filename="results/euler_diagram_planA_YAP.pdf", width=6, height=5)
-  }
-  
-  # Different Prognosis-RNAseq matches
-  {
-    euler_plot <- create_eulerr(
-      prog_BETTER$gene_name, "Better OS (PlanA)",
-      progCorbet_BETTER$gene_name, "Better OS (Corbet)",
-      progCorbetTriple_BETTER$gene_name, "Better OS (CorbetTriple)"
-    )
-    euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Better OS - Overlap of genes found in better OS from TCGA")
-    ggsave(euler_plot, filename="results/euler_diagram_betterOS.pdf", width=6, height=5)
-  }
-  {
-    euler_plot <- create_eulerr(
-      prog_WORSE$gene_name, "Worse OS (PlanA)",
-      progCorbet_WORSE$gene_name, "Worse OS (Corbet)",
-      progCorbetTriple_WORSE$gene_name, "Worse OS (CorbetTriple)"
-    )
-    euler_plot <- grid.arrange(grobs = list(euler_plot), top = "(STAR) Worse OS - Overlap of genes found in worse OS from TCGA")
-    ggsave(euler_plot, filename="results/euler_diagram_worseOS.pdf", width=6, height=5)
-  }
 }
 
 #### Comparing results with l2fc vs l2fc plots
@@ -221,14 +133,11 @@ library(readr)
                       padj_cutoff = cutoff_FDR,
                       out_path = "results/l2fc_planA_MDA24h10w.pdf",
                       subset_up = prog_BETTER$gene_name,
-                      subset_down = prog_WORSE$gene_name)
+                      subset_down = prog_WORSE$gene_name,
+                      subset_up_name = "BETTER OS",
+                      subset_down_name = "WORSE OS")
   
-  create_compare_plot(set1 = res$mda24h10w_24hAvN[res$mda24h10w_24hAvN$gene_name %in% yap_genes,],
-                      set2 = res$mda24h10w_10wAvN[res$mda24h10w_10wAvN$gene_name %in% yap_genes,],
-                      name1 = "(pHe 6.4 / 7.4) MDA-MB-231 24 h (YAP)",
-                      name2 = "(pHe 6.4 / 7.4) MDA-MB-231 10 w (YAP)",
-                      padj_cutoff = cutoff_FDR,
-                      out_path = "results/l2fc_planA_YAP-only_MDA24h10w.pdf")
+  source ('modules/l2fc_inverse_colors.R')
   
   
   # Generate and export statistics for (YAP y/n) x (L2FC down/up)
@@ -236,7 +145,7 @@ library(readr)
     sink()
     sink(paste0("results/l2fcDU_YAPyn_PlanAboth_stats_report.txt"))
     
-    # Fisher test
+    # Fisher testhttp://127.0.0.1:13679/graphics/019f3e0e-8951-4cfd-b599-5e22d519e0f2.png
     {
       fishertest <- with(planA$sig_BOTH,
                          fisher.test(table(
@@ -374,15 +283,13 @@ library(readr)
     fullsource <- planA$intersect
     tag <- "24h-U-10w"
     
-    hmsource <- planA$sig_UP[c(1,3,9)]
-    colnames(hmsource) <- c("gene_name", "MDA 24h", "MDA 10w")
-    get_hm(pathways="HIPPO", tag=tag, FIXED_ROWS=FIXED_ROWS_HIPPO)
-    get_hm(pathways="HIPPO",prog="UP", tag=tag, FIXED_ROWS=FIXED_ROWS_HIPPO)
-    
     hmsource <- planA$sig_DOWN[c(1,3,9)]
     colnames(hmsource) <- c("gene_name", "MDA 24h", "MDA 10w")
-    get_hm(pathways="ILKmany", tag=tag, FIXED_ROWS=FIXED_ROWS_ILK)
     get_hm(pathways="ILKmany",prog="DOWN", tag=tag, FIXED_ROWS=FIXED_ROWS_ILK)
+    
+    hmsource <- planA$sig_UP[c(1,3,9)]
+    colnames(hmsource) <- c("gene_name", "MDA 24h", "MDA 10w")
+    get_hm(pathways="HIPPO",prog="UP", tag=tag, FIXED_ROWS=FIXED_ROWS_HIPPO)
   }
 }
 
@@ -396,10 +303,7 @@ library(readr)
   
   # "(MDA 24h) U (MDA 10w)"
   # IPA_PATHWAYS_STAR_MDA24h_vs10W.csv
-  toppathwaysIPA(input = "GO/IPA_PATHWAYS_STAR_MDA24h_vs10W.csv", tag = "((MDA 24h) U (MDA 10w)) BOTH Common", limit = 50, exclude_from_top_by_index = c())
-  toppathwaysIPA(input = "GO/IPA_PATHWAYS_STAR_MDA24h_vs10W.csv", tag = "((MDA 24h) U (MDA 10w)) BOTH Common REDUCED", limit = 33, exclude_from_top_by_index = c(3,5,6,11,12,19,20,23:26,28:30,42,46,48),height=7)
   toppathwaysIPA(input = "GO/IPA_PATHWAYS_STAR_MDA24h_vs10W.csv", tag = "((MDA 24h) U (MDA 10w)) BOTH Common TOP20plus", limit = 26, exclude_from_top_by_index = c(21:26,28:32,34:44,46,48),height=6)
-  toppathwaysIPA(input = "GO/IPA_PATHWAYS_STAR_MDA24h_vs10W.csv", tag = "((MDA 24h) U (MDA 10w)) BOTH Common TOP10plus", limit = 17, exclude_from_top_by_index = c(11:13,15:26,28:32,34:44,46,48),height=6)
 }
 
 

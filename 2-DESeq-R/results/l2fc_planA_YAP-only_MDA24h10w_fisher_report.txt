@@ -1,3 +1,0 @@
-Fisher's Exact Test for Count Data 
- odds ratio:  1.768 
- reported P value:  4.727e-09

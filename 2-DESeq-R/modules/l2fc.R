@@ -1,5 +1,5 @@
 # source('intersect.R')
-create_compare_plot<- function(set1, set2, name1, name2, padj_cutoff, out_path, subset_up = c(), subset_down = c()){
+create_compare_plot<- function(set1, set2, name1, name2, padj_cutoff, out_path, subset_up = c(), subset_down = c(), subset_up_name = "", subset_down_name = ""){
   print(paste("Creating l2fc plot for",name1,"vs",name2,"(",out_path,")"))
   
   # Create subset of all shared entries in sets 1 and 2
@@ -7,11 +7,8 @@ create_compare_plot<- function(set1, set2, name1, name2, padj_cutoff, out_path, 
                        set2,
                        by = "gene_name")
   
-  padjtable <- with(merge_intersecting_genes_two_sets(set1,set2, ".1", ".2"),
-                 table(padj.1<padj_cutoff,padj.2<padj_cutoff))
-  
-  fishertest <- with(merge_intersecting_genes_two_sets(set1,set2, ".1", ".2"),
-                     fisher.test(table(padj.1<padj_cutoff,padj.2<padj_cutoff)))
+  fishertest <- with(merged_diff,
+                     fisher.test(table(padj.x<padj_cutoff,padj.y<padj_cutoff)))
   
   # Silly implicitly-assigned way to do colors
   merged_diff <- merged_diff %>% mutate(hack=paste0((padj.x < padj_cutoff),
@@ -32,8 +29,8 @@ create_compare_plot<- function(set1, set2, name1, name2, padj_cutoff, out_path, 
     "FALSETRUE"=paste0("padj < 0.1 only (",name2,")"),
     "TRUEFALSE"=paste0("padj < 0.1 only (",name1,")"),
     "TRUETRUEboth"=paste0("padj < 0.1 (",name1,") and (",name2,") SAME DIRECTION [", length(merged_diff$hack[merged_diff$hack == "TRUETRUEboth" | merged_diff$hack == "TRUETRUEbothSUBUP" | merged_diff$hack == "TRUETRUEbothSUBDOWN"]), " genes]"),
-    "TRUETRUEbothSUBDOWN"=paste0("padj < 0.1 (",name1,") and (",name2,") SAME DIRECTION and WORSE OS [", length(merged_diff$hack[merged_diff$hack == "TRUETRUEbothSUBDOWN"]), " genes]"),
-    "TRUETRUEbothSUBUP"=paste0("padj < 0.1 (",name1,") and (",name2,") SAME DIRECTION and BETTER OS [", length(merged_diff$hack[merged_diff$hack == "TRUETRUEbothSUBUP"]), " genes]"),
+    "TRUETRUEbothSUBDOWN"=paste0("padj < 0.1 (",name1,") and (",name2,") SAME DIRECTION and ",subset_down_name," [", length(merged_diff$hack[merged_diff$hack == "TRUETRUEbothSUBDOWN"]), " genes]"),
+    "TRUETRUEbothSUBUP"=paste0("padj < 0.1 (",name1,") and (",name2,") SAME DIRECTION and ",subset_up_name," [", length(merged_diff$hack[merged_diff$hack == "TRUETRUEbothSUBUP"]), " genes]"),
     "TRUETRUEdiff"=paste0("padj < 0.1 (",name1,") and (",name2,") [", length(merged_diff$hack[merged_diff$hack == "TRUETRUEdiff"]), " genes]")
     )
   

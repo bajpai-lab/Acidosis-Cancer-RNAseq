@@ -227,14 +227,18 @@ rm(list=ls())
       }
       
       # Creating statistics for survival data
-      t <- coxph(Surv(time, status) ~ Row_mode=='high', data = surdf_overlap) %>% tbl_regression(exp=TRUE)
+      reference = 'high'
+      if (grepl("progWORSE",tag)){
+        reference = 'low'
+      }
+      t <- coxph(Surv(time, status) ~ Row_mode==reference, data = surdf_overlap) %>% tbl_regression(exp=TRUE)
       write.csv(t$table_body, paste0(out_path, "survival-curve_", tag, "_STATS.csv"))
       
       # Display survival statistics on the plot
       p$plot <- p$plot +
         annotate("text",
                  label = paste0(
-                   "      'high' stats:",
+                   "      '", reference,"' stats:",
                    "\n   p (KM) = ",if (surv_pvalue(fit)$pval < 0.0001){
                      format(surv_pvalue(fit)$pval, digits=3, scientific=T)
                    }else{
@@ -258,7 +262,7 @@ rm(list=ls())
   
   # Creating Kaplan-Meier curves for our DESeq analysis hits (filtering using prognosis genes)
   {
-    genes <- read_csv("../2-DESeq-R/results/intersect_PlanA_(10w)U(24h)_BOTH-FC-by-acidosis_0.1FDR.csv")
+    genes <- read_csv("../../2-DESeq-R/results/intersect_PlanA_(10w)U(24h)_BOTH-FC-by-acidosis_0.1FDR.csv")
     out_path = "PlanA/"
     
     # Activated by acidosis
@@ -298,7 +302,7 @@ rm(list=ls())
   
   # Creating Kaplan-Meier curves for Corbet Triple
   {
-    genes <- read_csv("../2-DESeq-R/results/intersect_corbet_triple_BOTH-FC-by-acidosis_0.1FDR.csv")
+    genes <- read_csv("../../2-DESeq-R/results/intersect_corbet_triple_BOTH-FC-by-acidosis_0.1FDR.csv")
     out_path = "CorbetTriple/"
     
     # Activated by acidosis
@@ -336,7 +340,7 @@ rm(list=ls())
   
   # Creating Kaplan-Meier curves for Corbet
   {
-    genes <- read_csv("../2-DESeq-R/results/corbet_samples/Acidosis-vs-control_q0.1_anyFC_corbet_AvN.csv")
+    genes <- read_csv("../../2-DESeq-R/results/corbet_samples/Acidosis-vs-control_q0.1_anyFC_corbet_AvN.csv")
     out_path = "Corbet/"
     
     # Activated by acidosis
